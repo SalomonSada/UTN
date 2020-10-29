@@ -77,7 +77,7 @@ int jugar(string name, string name2, int jugadores, bool azar) {
 
     for (i=1; i<=6; i++) {
         bool nextRound = false;
-        int turno = 1;
+        int turno = 1;         ///  ----> Turno (solo se usa para la version de DOS jugadores)
         /// Datos Player 1:
         int puntaje1Ronda=0;
         /// Datos Player 2:
@@ -152,16 +152,15 @@ int jugar(string name, string name2, int jugadores, bool azar) {
             system("cls");
             /// Cerramos la ronda para modo UN jugador
             if (jugadores==1) {
-                if (puntaje1Ronda>=21) nextRound = true;
+                if (puntaje1Ronda>=21) nextRound=true;
             }
+
+            /// ||..................... MODO DOS JUGADORES .....................||
             else {
-                if (turno==1) {
-
+                /// Pasamos el turno del jugador UNO al jugador DOS. Acorde a si es el primer turno de la ronda o no
+                if (puntaje1Ronda>=21) {
+                    if (turno>1) turno2 = false;
                 }
-            }
-/// ||..................... MODO DOS JUGADORES .....................||
-
-            if (jugadores==2) {
                 /// ejecutamos el turno del Player 2:
                 while (puntaje2Ronda < 21 && turno2==true) {
                     cout<<"Turno de "<<name2<<": \n\n";
@@ -224,11 +223,10 @@ int jugar(string name, string name2, int jugadores, bool azar) {
                 cout<<":::     Buncos:  "<<totalBuncos2<<"       ::: \n............................ \n\n";
                 system("pause");
                 system("cls");
-                /// Cerramos la Ronda:
-
+                /// Cerramos la Ronda para el modo DOS jugadores:
+                if (puntaje1Ronda>=21 || puntaje2Ronda>=21) nextRound = true;
+                turno++;
             }
-                /// Cerramos la Ronda para el caso de ser UN solo jugador:
-
 
         }
     }
