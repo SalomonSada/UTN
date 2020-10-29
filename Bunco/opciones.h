@@ -77,6 +77,7 @@ int jugar(string name, string name2, int jugadores, bool azar) {
 
     for (i=1; i<=6; i++) {
         bool nextRound = false;
+        int turno = 1;
         /// Datos Player 1:
         int puntaje1Ronda=0;
         /// Datos Player 2:
@@ -84,7 +85,8 @@ int jugar(string name, string name2, int jugadores, bool azar) {
 
        while (nextRound == false) {
             /// Ejecutamos el turno de Player 1:
-            while (puntaje1Ronda < 21) {
+            bool turno1=true, turno2=true;
+            while (puntaje1Ronda < 21 && turno1==true) {
                 cout<<"Turno de "<<name<<": \n\n";
                 int bunco=0;
                 int semi_bunco=0;
@@ -132,6 +134,10 @@ int jugar(string name, string name2, int jugadores, bool azar) {
                 else {
                     fallido++;
                     cout<<"Tiro fallido \n\n";
+                    /// Pasamos el turno al siguiente jugador en caso de la modalidad DOS jugadores
+                    if (jugadores==2) {
+                        turno1=false;
+                    }
                 }
                 system("pause");
                 system("cls");
@@ -140,15 +146,25 @@ int jugar(string name, string name2, int jugadores, bool azar) {
             puntaje1+=puntaje1Ronda;
             cout<<"............................ \n";
             cout<<":::     RONDA Nro "<<i<<"      ::: \n";
-            cout<<"::: PUNTAJE"<<name<<": "<<puntaje1<<"  ::: \n";
+            cout<<"::: PUNTAJE "<<name<<": "<<puntaje1<<"  ::: \n";
             cout<<":::     Buncos:  "<<totalBuncos<<"       ::: \n............................ \n\n";
             system("pause");
             system("cls");
+            /// Cerramos la ronda para modo UN jugador
+            if (jugadores==1) {
+                if (puntaje1Ronda>=21) nextRound = true;
+            }
+            else {
+                if (turno==1) {
+
+                }
+            }
+/// ||..................... MODO DOS JUGADORES .....................||
 
             if (jugadores==2) {
                 /// ejecutamos el turno del Player 2:
-                while (puntaje2Ronda < 21) {
-                    cout<<"Turno de "<<name<<": \n\n";
+                while (puntaje2Ronda < 21 && turno2==true) {
+                    cout<<"Turno de "<<name2<<": \n\n";
                     int bunco=0;
                     int semi_bunco=0;
                     int suma_dados=0;
@@ -195,6 +211,7 @@ int jugar(string name, string name2, int jugadores, bool azar) {
                     else {
                         fallido2++;
                         cout<<"Tiro fallido \n\n";
+                        turno2=false;
                     }
                     system("pause");
                     system("cls");
@@ -203,15 +220,15 @@ int jugar(string name, string name2, int jugadores, bool azar) {
                 puntaje2+=puntaje2Ronda;
                 cout<<"............................ \n";
                 cout<<":::     RONDA Nro "<<i<<"      ::: \n";
-                cout<<"::: PUNTAJE"<<name2<<": "<<puntaje2<<"  ::: \n";
+                cout<<"::: PUNTAJE "<<name2<<": "<<puntaje2<<"  ::: \n";
                 cout<<":::     Buncos:  "<<totalBuncos2<<"       ::: \n............................ \n\n";
                 system("pause");
                 system("cls");
                 /// Cerramos la Ronda:
-              ///  if (puntaje1Ronda)
+
             }
                 /// Cerramos la Ronda para el caso de ser UN solo jugador:
-            else if (puntaje1Ronda>=21) nextRound = true;
+
 
         }
     }

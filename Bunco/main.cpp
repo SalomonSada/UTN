@@ -20,13 +20,19 @@ int main () {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
                 cin>>name[0];
                 system("cls");
-                jugar(name[0], "", 1, true);
+                jugar(name[0], "", 1, true); /// True a revisar
                 ///onePlayer();
             break;
 
             case 2:
                 system("cls");
-                twoPlayer();
+                cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
+                cin>>name[0];
+                cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
+                cin>>name[1];
+                system("cls");
+                jugar(name[0], name[1], 2, true); /// True a revisar
+                ///twoPlayer();
             break;
 
             case 3:
