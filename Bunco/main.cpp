@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <tuple>
 
 using namespace std;
 #include "opciones.h"
@@ -15,26 +16,36 @@ int main () {
 
     while (true) {
         switch(opciones) {
-            case 1:
+            case 1: {
                 system("cls");
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
                 cin>>name[0];
                 system("cls");
-                jugar(name[0], "", 1, true); /// True a revisar
-                ///onePlayer();
+                auto resultado = jugar(name[0], "", 1, true); /// True a revisar
+                puntaje = get<0>(resultado);
+                jugadores = get<1>(resultado);
+                /** el cout de abajo se mostrara desde la funcion jugar() en el header. (lo muestro aca para probar
+                 que esta devolviendo los datos que necesitamos al main() para establecer la puntuacion mas alta) */
+                cout<<"Jugador: "<<name[0]<<".................... "<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
             break;
-
-            case 2:
+            }
+            case 2: {
                 system("cls");
                 cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
                 cin>>name[0];
                 cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
                 cin>>name[1];
                 system("cls");
-                jugar(name[0], name[1], 2, true); /// True a revisar
-                ///twoPlayer();
+                auto resultado = jugar(name[0], name[1], 2, true); /// True a revisar
+                puntaje = get<0>(resultado);
+                jugadores = get<1>(resultado);
+                /** el cout de abajo se mostrara desde la funcion jugar() en el header. (lo muestro aca para probar
+                 que esta devolviendo los datos que necesitamos al main() para establecer la puntuacion mas alta) */
+                if (jugadores == 1) cout<<"Jugador: "<<name[0]<<".................... ";
+                else cout<<"Jugador: "<<name[1]<<".................... ";
+                cout<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
             break;
-
+            }
             case 3:
                 system("cls");
                 higher();
@@ -61,7 +72,5 @@ int main () {
         menu();
         cin>>opciones;
     }
-
-
     return 0;
 }

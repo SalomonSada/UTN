@@ -3,32 +3,12 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <tuple>
 
 using namespace std;
 
-void jugar() {
-
-}
-void onePlayer() {
-    cout<<"Aca se jugara con UN jugador \n\n";
-    system("pause");
-    system("cls");
-}
-
-void twoPlayer() {
-    cout<<"Aca se jugara con DOS jugador \n\n";
-    system("pause");
-    system("cls");
-}
-
 void higher() {
     cout<<"Puntaje mas alto: \n\n"<<"Nombre del jugador: "<<"XXX"<<" | Cantidad de Buncos (Esto sera una variable) \n\n";
-    system("pause");
-    system("cls");
-}
-
-void simular() {
-    cout<<"Aca jugaras en el modo simulado \n\n";
     system("pause");
     system("cls");
 }
@@ -57,8 +37,10 @@ void menu() {
        UN JUGADOR ---> hasta que el puntaje sumado sea >= 21. Los tiros fallidos se cuentan para restar 3 puntos al final por cada uno.
     DOS JUGADORES ---> El primer jugador que sume un puntaje >= 21.
     En caso de que el primer jugador cumpla esa condicion en el primer turno. El segundo jugador tiene la oportunidad de usar su turno. */
-/// Opcion 1 jugador:
-int jugar(string name, string name2, int jugadores, bool azar) {
+
+/// https://www.youtube.com/watch?v=81-cNkP1CuQ  ----> tuple, para devolver multiples valores en una funcion.
+/// pregunta en stackOverflow deonde vi el tuple ----> https://stackoverflow.com/questions/6394741/can-a-c-function-return-more-than-one-value#:~:text=A%20C%2B%2B%20function%20can%20return,in%20a%20class%20or%20struct.&text=Or%20you%20could%20use%20std,is%20available%20with%20your%20compiler.
+tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i, d;
     /// Datos para Player 1:
     int puntaje1=0;
@@ -87,7 +69,9 @@ int jugar(string name, string name2, int jugadores, bool azar) {
             /// Ejecutamos el turno de Player 1:
             bool turno1=true, turno2=true;
             while (puntaje1Ronda < 21 && turno1==true) {
+                /// Mostramos los datos (esto debe estar con la interfaz indicada)
                 cout<<"Turno de "<<name<<": \n\n";
+
                 int bunco=0;
                 int semi_bunco=0;
                 int suma_dados=0;
@@ -234,6 +218,20 @@ int jugar(string name, string name2, int jugadores, bool azar) {
     cout<<"PUNTAJE FINAL antes de restar los tiros fallidos: "<<puntaje1<<"\n Cantidad de tiros fallidos: "<<fallido<<"\n\n";
     puntaje1-=(fallido*3);
     cout<<"PUNTAJE FINAL despues de restar los tiros fallidos: "<<puntaje1<<"\n\n";
-    return puntaje1;
+    system("cls");
+    if (jugadores==1) {
+       return make_tuple(puntaje1, 1);
+    }
+    else {
+        if (puntaje1>puntaje2) {
+            return make_tuple(puntaje1, 1); /// gana player 1
+        }
+        else if (puntaje2>puntaje1) {
+            return make_tuple(puntaje2, 2); /// gana player 2
+        }
+        else {
+            return make_tuple(0, 0); /// empate
+        }
+    }
 }
 #endif // FUNCIONES_H_INCLUDED

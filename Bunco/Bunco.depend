@@ -8,12 +8,14 @@
 	<iostream>
 	<cstdlib>
 
-1603993603 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
+1604083125 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
 	<iostream>
 	<cstdlib>
+	<tuple>
 	"opciones.h"
 
-1603999037 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
+1604083043 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
 	<iostream>
 	<cstdlib>
+	<tuple>
 
