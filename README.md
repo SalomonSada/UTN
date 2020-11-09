@@ -30,4 +30,3 @@ Copio referencias:
 Indio que lo explica re bien: https://www.youtube.com/watch?v=81-cNkP1CuQ
 
 StackOverflow (Respuesta de Sven) https://stackoverflow.com/questions/6394741/can-a-c-function-return-more-than-one-value#:~:text=A%20C%2B%2B%20function%20can%20return,in%20a%20class%20or%20struct.&text=Or%20you%20could%20use%20std,is%20available%20with%20your%20compiler.
-
