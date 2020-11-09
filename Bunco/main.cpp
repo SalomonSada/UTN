@@ -1,9 +1,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <tuple>
+#include <time.h>
+
 
 using namespace std;
 #include "opciones.h"
+#include "funciones.h"
+
 
 int main () {
     int opciones;
@@ -51,10 +55,19 @@ int main () {
                 higher();
             break;
 
-            case 4:
+            case 4: {
                 system("cls");
-                simular();
+                cout<<"Bienvenido!! \n\nIngrese su nombre: ";
+                cin>>name[0];
+                system("cls");
+                auto resultado = jugar(name[0], "", 1, false); /// True a revisar
+                puntaje = get<0>(resultado);
+                jugadores = get<1>(resultado);
+                /** el cout de abajo se mostrara desde la funcion jugar() en el header. (lo muestro aca para probar
+                 que esta devolviendo los datos que necesitamos al main() para establecer la puntuacion mas alta) */
+                cout<<"Jugador: "<<name[0]<<".................... "<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
             break;
+            }
 
             case 5:
                 system("cls");
