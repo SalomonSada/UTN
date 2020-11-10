@@ -8,26 +8,30 @@
 	<iostream>
 	<cstdlib>
 
-1604954396 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
+1605032942 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
 	<iostream>
 	<cstdlib>
 	<tuple>
 	<time.h>
 	"opciones.h"
 	"funciones.h"
+	"interfaz.h"
 
-1604956948 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
+1605046367 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
 	<iostream>
 	<cstdlib>
 	<tuple>
 	"funciones.h"
+	"interfaz.h"
 
 1603854282 d:\usuarios\escritorio\bunco\emojis.h
 	<map>
 	<string>
 
-1604955013 d:\usuarios\escritorio\bunco\utn\bunco\funciones.h
+1605046056 d:\usuarios\escritorio\bunco\utn\bunco\funciones.h
 	<iostream>
 	<cstdlib>
 	<tuple>
+
+1605032927 d:\usuarios\escritorio\bunco\utn\bunco\interfaz.h
 

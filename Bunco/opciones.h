@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "funciones.h"
+#include "interfaz.h"
 
 /** Reglas del bunco:
     6 rondas, del 1 al 6. ---->  Para comenzar c/ronda se lanzan tres dados. Acorde a los resultados, tendra un puntaje y se vera si sigue lanzando:
@@ -29,11 +30,13 @@ using namespace std;
 
 tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i, d;
+
     /// Datos para Player 1:
-    int puntaje1=0;   /// puntaje total
+    int puntaje1=0;
     int totalBuncos=0;
     int fallido=0;
     int lanzamiento1 = 1;
+
     /// Datos para Player 2:
     int puntaje2=0;
     int totalBuncos2=0;
@@ -45,87 +48,35 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
         int puntaje_x_Ronda1=0, puntaje_x_Ronda2=0;
 
        while (nextRound == false) {
-
-            bool turno1=true, turno2=true;
+            bool turno_player_1=true, turno_player_2=true;
             int puntaje_x_turno1=0, puntaje_x_turno2=0;
+
             /// Ejecutamos el turno de Player 1:
-            while (turno1==true) {
-                /// Mostramos los datos (esto debe estar como la interfaz indicada, verla en el archivo de funciones)
+            while (turno_player_1==true) {
+                /// Mostramos la informacion del jugador
                 infoTurno(name, i,puntaje1,totalBuncos,lanzamiento1, puntaje_x_Ronda1);
                 lanzamiento1++;
-                int bunco=0;
-                int semi_bunco=0;
-                int suma_dados=0;
 
                 /// Acorde al modo de juego, cargamos los dados
                 if (azar==false) {
-                    /// Version Simulada:
-                    cout<<"Ingresa los tres dados: \n";
-                    for (d=0; d<3; d++) cin>>dados[d];
+                    cargarDadosSimulado(dados, 3);
                 }
                 else {
-                    /// Version Azar:
-                    cout<<"A lanzar los dados, BUENA SUERTE!! \n\n";
-                    system("pause");
-                    cargarAleatorio(dados, 3, 6);
-                    cout<<endl<<"Haz sacado: ";
-                    for (d=0; d<3; d++) cout<<dados[d]<<", ";
-                    cout<<endl;
+                    cargarDados(dados, 3, 6);
+                    mostrarDados(dados, 3);
                 }
 
-                for (d=0; d<3; d++) {
-                    /// 21 pts o 2pts o 1 pt
-                    if (dados[d] == i) bunco++;
-                    /// 5 pts
-                    else if (d != 2 && dados[d] == dados[d+1]) semi_bunco++;
-                    /// 3 pts
-                    suma_dados+=dados[d];
-                }
+                /// Evaluamos los resultados
+                puntaje_x_turno1 += evaluarDados(dados, 3, i);
 
-                /// 5 pts
-                if (semi_bunco == 2) {
-                    cout<<"\n 5 puntos! \n\n";
-                    puntaje_x_turno1+=5;
-                }
-                /// 3 pts
-                else if (suma_dados % 5 == 0 && bunco<3) {  /// (bunco < 3) porque 5*3= 15, multiplo de 5. en ese caso hay que sumar 21, no 3
-                    cout<<"\n 3 puntos! \n\n";
-                    puntaje_x_turno1+=3;
-                }
-                /// 21 pts ó 2pts ó 1 pt
-                else if (bunco > 0) {
-                    switch (bunco) {
-                        case 3:
-                            cout<<"\n BUNCO!!  21 pts \n\n";
-                            puntaje_x_turno1+=21;
-                            totalBuncos++;
-                        break;
-                        case 2:
-                            cout<<"\n 2 puntos! \n\n";
-                            puntaje_x_turno1+=2;
-                        break;
-                        case 1:
-                            cout<<"\n 1 punto! \n\n";
-                            puntaje_x_turno1+=1;
-                        break;
-                    }
-                }
-                else {
-                    fallido++;
-                    cout<<"\nTiro fallido \n\n";
-                    /// Pasamos el turno al siguiente jugador en caso de la modalidad DOS jugadores
-                    if (jugadores==2) {
-                        turno1=false;
-                    }
-                }
                 /// corte del ciclo while, para pasar al siguiente turno o ronda. segun la modalidad:
                 if (jugadores==1) {
-                    if (puntaje_x_turno1 >= 21) turno1=false;
+                    if (puntaje_x_turno1 >= 21) turno_player_1=false;
                     ptsRonda(puntaje_x_turno1);
                 }
                 else {
                     ptsRonda(puntaje_x_turno1);
-                    if (puntaje_x_turno1+puntaje_x_Ronda1 >= 21) turno1=false;
+                    if (puntaje_x_turno1+puntaje_x_Ronda1 >= 21) turno_player_1=false;
                 }
                 system("pause");
                 system("cls");
@@ -153,81 +104,31 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                 /// Pasamos el turno del jugador UNO al jugador DOS. Acorde a si es el primer turno de la ronda o no
                 if (puntaje_x_Ronda1>=21) {
                     if (turno>1) {
-                        turno2 = false;
+                        turno_player_2 = false;
                         nextRound = true;
                     }
                 }
 
 
                 /// ejecutar el turno del Player 2:
-                while (turno2==true) {
+                while (turno_player_2==true) {
                     /// Mostramos los datos (esto debe estar como la interfaz indicada, verla en el archivo de funciones)
                     infoTurno(name2, i,puntaje2,totalBuncos2,lanzamiento2, puntaje_x_Ronda2);
                     lanzamiento2++;
 
-                    int bunco=0;
-                    int semi_bunco=0;
-                    int suma_dados=0;
-
                     if (azar==false) {
-                        /// Version Simulada:
-                        cout<<"Ingresa los tres dados: \n";
-                        for (d=0; d<3; d++) cin>>dados[d];
+                    cargarDadosSimulado(dados, 3);
                     }
                     else {
-                        /// Version Azar:
-                        cout<<"A lanzar los dados, BUENA SUERTE!! \n\n";
-                        system("pause");
-                        cargarAleatorio(dados, 3, 6);
-                        cout<<endl<<"Haz sacado: ";
-                        for (d=0; d<3; d++) cout<<dados[d]<<", ";
-                        cout<<endl;
+                        cargarDados(dados, 3, 6);
+                        mostrarDados(dados, 3);
                     }
+                    puntaje_x_turno2=evaluarDados(dados, 3, i);
 
-                    for (d=0; d<3; d++) {
-                        /// 21 pts o 2pts o 1 pt
-                        if (dados[d] == i) bunco++;
-                        /// 5 pts
-                        else if (d != 2 && dados[d] == dados[d+1]) semi_bunco++;
-                        /// 3 pts
-                        suma_dados+=dados[d];
-                    }
-                    /// 5 pts
-                    if (semi_bunco == 2) {
-                        cout<<"Haz sacado un semi-bunco! \n\n";
-                        puntaje_x_turno2+=5;
-                        ptsRonda(puntaje_x_Ronda2);
-                    }
-                    /// 3 pts
-                    else if (suma_dados % 5 == 0 && bunco<3) {  /// (bunco < 3) porque 5*3= 15, multiplo de 5. en ese caso hay que sumar 21, no 3
-                        cout<<"Haz ganado 3 puntos! \n\n";
-                        puntaje_x_turno2+=3;
-                    }
-                    /// 21 pts ó 2pts ó 1 pt
-                    else if (bunco > 0) {
-                        switch (bunco) {
-                            case 3:
-                                cout<<"Haz Sacado bunco, lacrita! 21 pts \n\n";
-                                puntaje_x_turno2+=21;
-                                totalBuncos2++;
-                            break;
-                            case 2:
-                                cout<<"Haz sacado 2 puntos! \n\n";
-                                puntaje_x_turno2+=2;
-                            break;
-                            case 1:
-                                cout<<"Haz sacado 1 punto! \n\n";
-                                puntaje_x_turno2+=1;
-                            break;
-                        }
-                    }
-                    else {
-                        cout<<"Tiro fallido \n\n";
-                        turno2=false;
-                    }
+
 
                     ptsRonda(puntaje_x_turno2);
-                    if (puntaje_x_turno2+puntaje_x_Ronda2 >= 21) turno2=false;
+                    if (puntaje_x_turno2+puntaje_x_Ronda2 >= 21) turno_player_2=false;
                     system("pause");
                     system("cls");
                 }

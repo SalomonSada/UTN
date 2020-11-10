@@ -6,6 +6,7 @@
 using namespace std;
 #include "opciones.h"
 #include "funciones.h"
+#include "interfaz.h"
 
 int main () {
     int opciones;
