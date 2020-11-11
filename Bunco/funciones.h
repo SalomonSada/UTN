@@ -22,7 +22,7 @@ int cargarDadosSimulado(int dados[], int tam) {
 }
 
 int mostrarDados(int dados[], int tam) {
-    cout<<endl<<"Haz sacado: ";
+    cout<<endl<<"  DADOS: ";
     for (int i=0; i<tam; i++) cout<<dados[i]<<", ";
     cout<<endl;
 }
@@ -99,9 +99,9 @@ int evaluarDados (int dados[], int tam, int ronda) {
 
     pos = maximo(puntos, 5);
 
+    cout<<"PUNTAJE: "<<puntos[pos]<<endl;
+    cout<<"SACASTE: ";
     if (puntos[pos] != 0) {
-        cout<<"PUNTAJE: "<<puntos[pos]<<endl;
-        cout<<"SACASTE: ";
         switch (pos) {
             case 0: cout<<"BUNCO!!!  \n\n";
                 break;

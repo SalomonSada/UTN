@@ -7,8 +7,8 @@ void menu() {
     cout<<"4) Modo simulado (carga de datos manual). \n5) Salir. \n\n Ingresar: " ;
 }
 
-void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int pts){
-    cout<<"TURNO DE "<<name<<" | RONDA NRO "<<ronda<<" | PUNTAJE ACUMULADO: "<<puntaje<<" | PUNTAJE RONDA ACTUAL: "<<pts<<endl;
+void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int puntos){
+    cout<<"TURNO DE "<<name<<" | RONDA NRO "<<ronda<<" | PUNTAJE ACUMULADO: "<<puntaje+puntos<<endl;
     cout<<"------------------------------------------------------- \n";
     cout<<"VECES QUE OBTUVO BUNCO: "<<buncos<<endl;
     cout<<"------------------------------------------------------- \n";
@@ -17,9 +17,9 @@ void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos
 }
 
 void ptsRonda(int puntaje) {
-    cout<<"**************************    \n";
-    cout<<"| PUNTAJE DE LA TIRADA: "<<puntaje<<" | \n";
-    cout<<"************************** \n\n";
+    cout<<"***************************    \n";
+    cout<<"| PUNTAJE DE LA RONDA: "<<puntaje<<" | \n";
+    cout<<"*************************** \n\n";
 }
 
 void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fallos, int lanzamientos)   {
@@ -47,7 +47,7 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
     cout<<"------------------------------ \n";
     cout<<"  PUNTAJE "<<name2<<": "<<puntaje2<<" PUNTOS \n";
     cout<<"    CANTIDAD DE BUNCOS: "<<buncos2<<endl;
-    cout<<"------------------------------ \n";
+    cout<<"------------------------------ \n\n\n";
     system("pause");
     system("cls");
 

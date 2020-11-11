@@ -30,34 +30,34 @@ using namespace std;
 
 tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i, d;
+    int result;
 
-    /// Datos para Player 1:
+/// -----> Player 1 <-----
     int puntaje1=0;
     int totalBuncos=0;
     int fallido=0;
     int lanzamiento1 = 1;
 
-    /// Datos para Player 2:
+/// -----> Player 2 <-----
     int puntaje2=0;
     int totalBuncos2=0;
     int lanzamiento2 = 1;
 
     for (i=1; i<=6; i++) {
         bool nextRound = false;
-        int turno = 1;         ///  ----> Turno (solo se usa para la version de DOS jugadores)
         int puntaje_x_Ronda1=0, puntaje_x_Ronda2=0;
+        int turno=1;   /// -----> Solo para la version de dos jugadores
 
        while (nextRound == false) {
             bool turno_player_1=true, turno_player_2=true;
             int puntaje_x_turno1=0, puntaje_x_turno2=0;
 
-            /// Ejecutamos el turno de Player 1:
+///     ------------> Turno player 1 <------------
             while (turno_player_1==true) {
-                /// Mostramos la informacion del jugador
-                infoTurno(name, i,puntaje1,totalBuncos,lanzamiento1, puntaje_x_Ronda1);
+                infoTurno(name, i,puntaje1,totalBuncos,lanzamiento1, puntaje_x_turno1);
                 lanzamiento1++;
 
-                /// Acorde al modo de juego, cargamos los dados
+///         --------> Tirar los dados segun modalidad <--------
                 if (azar==false) {
                     cargarDadosSimulado(dados, 3);
                 }
@@ -66,42 +66,45 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                     mostrarDados(dados, 3);
                 }
 
-                /// Evaluamos los resultados
-                puntaje_x_turno1 += evaluarDados(dados, 3, i);
+///         ---------------> Evaluar los dados <---------------
+                result = evaluarDados(dados, 3, i);
+                puntaje_x_turno1 += result;
+                if (result==21) totalBuncos++;
+                if (result==0)  {
+                    fallido++;
+                    if (jugadores==2) {
+                        turno_player_1=false;  /// ---> pasamos turno al siguiente jugador <---
+                    }
+                }
 
-                /// corte del ciclo while, para pasar al siguiente turno o ronda. segun la modalidad:
+///         ---------> Pasar al siguiente turno o ronda <----------
                 if (jugadores==1) {
                     if (puntaje_x_turno1 >= 21) turno_player_1=false;
-                    ptsRonda(puntaje_x_turno1);
                 }
                 else {
-                    ptsRonda(puntaje_x_turno1);
                     if (puntaje_x_turno1+puntaje_x_Ronda1 >= 21) turno_player_1=false;
                 }
+
+                ptsRonda(puntaje_x_Ronda1+puntaje_x_turno1);
                 system("pause");
                 system("cls");
             }
 
+///     -----> Salimos del turno de player 1 <-----
             puntaje_x_Ronda1+=puntaje_x_turno1;
-            /// Cerramos la ronda para modo UN jugador
+            puntaje1+=puntaje_x_turno1;
+///     -----> Cerramos la ronda para modo UN jugador <-----
             if (jugadores==1) {
                 nextRound=true;
-                /// Mostramos info entre turno (Esto hay que adjustarlo acorde a la interfaz que indican)
-                puntaje1+=puntaje_x_Ronda1;
+    //       puntaje1+=puntaje_x_Ronda1;
                 entreRonda_1jugador(name,i,puntaje1,totalBuncos,fallido,lanzamiento1);
             }
 
-
-
-
-            /// ||..................... MODO DOS JUGADORES .....................||
+///      ||..................... MODO DOS JUGADORES .....................||
             else {
-                /// Sumamos los puntos
-                puntaje_x_Ronda1+=puntaje_x_turno1;
-                puntaje1+=puntaje_x_turno1;
-                ///Mostramos info entre turno
+          //      puntaje_x_Ronda1+=puntaje_x_turno1;
+          //      puntaje1+=puntaje_x_turno1;
                 entreRonda_2jugadores(name, name2, i, puntaje1, puntaje2, totalBuncos, totalBuncos2, 2);
-                /// Pasamos el turno del jugador UNO al jugador DOS. Acorde a si es el primer turno de la ronda o no
                 if (puntaje_x_Ronda1>=21) {
                     if (turno>1) {
                         turno_player_2 = false;
@@ -109,11 +112,9 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                     }
                 }
 
-
-                /// ejecutar el turno del Player 2:
+///     ------------> Turno player 2 <------------
                 while (turno_player_2==true) {
-                    /// Mostramos los datos (esto debe estar como la interfaz indicada, verla en el archivo de funciones)
-                    infoTurno(name2, i,puntaje2,totalBuncos2,lanzamiento2, puntaje_x_Ronda2);
+                    infoTurno(name2, i,puntaje2,totalBuncos2,lanzamiento2, puntaje_x_turno2);
                     lanzamiento2++;
 
                     if (azar==false) {
@@ -123,20 +124,30 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                         cargarDados(dados, 3, 6);
                         mostrarDados(dados, 3);
                     }
-                    puntaje_x_turno2=evaluarDados(dados, 3, i);
 
+                    result = evaluarDados(dados, 3, i);
+                    puntaje_x_turno2+=result;
+                    if (result==21) totalBuncos2++;
+                    if (result==0)  {
+                        fallido++;
+                        if (jugadores==2) {
+                            turno_player_2=false;
+                            cout<<endl<<"MIRA"<<endl;
+                        }
+                    }
 
-
-                    ptsRonda(puntaje_x_turno2);
                     if (puntaje_x_turno2+puntaje_x_Ronda2 >= 21) turno_player_2=false;
+
+                    ptsRonda(puntaje_x_Ronda2+puntaje_x_turno2);
                     system("pause");
                     system("cls");
                 }
 
-                /// Sumamos los puntos
+///         -----> Salimos del turno de player 2 <-----
                 puntaje_x_Ronda2+=puntaje_x_turno2;
                 puntaje2+=puntaje_x_turno2;
-                /// Mostramos info entre turno si corresponde
+
+///         -----> Mostramos info entre turno si corresponde
                 if (nextRound==false) {
                     entreRonda_2jugadores(name, name2, i, puntaje1, puntaje2, totalBuncos, totalBuncos2, 1);
                 }
@@ -148,7 +159,7 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     }
     if (jugadores==1) {
         /// Restamos los tiros fallidos para la version de Un jugador
-        puntaje1-=(fallido*3);
+        puntaje1-=(fallido*2);
         system("cls");
         return make_tuple(puntaje1, 1);
     }
