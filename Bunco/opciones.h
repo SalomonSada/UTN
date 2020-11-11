@@ -147,20 +147,19 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                 puntaje_x_Ronda2+=puntaje_x_turno2;
                 puntaje2+=puntaje_x_turno2;
 
-///         -----> Mostramos info entre turno si corresponde
+///         -----> Mostramos info entre turno si corresponde <-----
                 if (nextRound==false) {
                     entreRonda_2jugadores(name, name2, i, puntaje1, puntaje2, totalBuncos, totalBuncos2, 1);
                 }
-                /// Cerramos la Ronda para el modo DOS jugadores:
+///         -----> Cerramos la Ronda para el modo DOS jugadores <-----
                 if (puntaje_x_Ronda1>=21 || puntaje_x_Ronda2>=21) nextRound = true;
                 turno++;
             }
         }
     }
     if (jugadores==1) {
-        /// Restamos los tiros fallidos para la version de Un jugador
         puntaje1-=(fallido*2);
-        system("cls");
+        finJuego_1jugador(name,puntaje1,totalBuncos,fallido,lanzamiento1-1);
         return make_tuple(puntaje1, 1);
     }
     else {

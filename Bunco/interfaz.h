@@ -3,7 +3,7 @@
 
 void menu() {
     cout<<"::::: Bienvenido a jugar Bunco ::::: \n\n Escoja el numero de la opcion que desea seleccionar: \n\n";
-    cout<<"1) Juego nuevo para UN jugador. \n2) Juego nuevo para DOS jugadores. \n3) Puntacion mas alta. \n";
+    cout<<"1) Juego nuevo para UN jugador. \n2) Juego nuevo para DOS jugadores. \n3) Mostrar puntacion mas alta. \n";
     cout<<"4) Modo simulado (carga de datos manual). \n5) Salir. \n\n Ingresar: " ;
 }
 
@@ -30,7 +30,21 @@ void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fa
     cout<<"          Buncos:  "<<buncos<<"           \n";
     cout<<"      Tiradas Fallidas:"<<fallos<<"     \n";
     cout<<"        Lanzamientos:"<<lanzamientos<<"       \n";
+    cout<<"------------------------------ \n\n\n";
+    system("pause");
+    system("cls");
+}
+
+void finJuego_1jugador(string name, int puntaje, int buncos, int fallos, int lanzamientos)   {
     cout<<"------------------------------ \n";
+    cout<<"        JUGADOR: "<<name<<"\n";
+    cout<<"------------------------------ \n";
+    cout<<"          BUNCOS:  "<<buncos<<"           \n";
+    cout<<"      TIRADAS FALLIDAS:"<<fallos<<"     \n";
+    cout<<"        LANZAMIENTOS:"<<lanzamientos<<"       \n";
+    cout<<"------------------------------ \n";
+    cout<<"      PUNTAJE TOTAL: "<<puntaje<<"\n";
+    cout<<"------------------------------ \n\n\n";
     system("pause");
     system("cls");
 }
@@ -50,7 +64,20 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
     cout<<"------------------------------ \n\n\n";
     system("pause");
     system("cls");
-
 }
+
+void finJuego_2jugadores(string name, int puntaje, int buncos, int fallos, int lanzamientos)   {
+    cout<<"         FELICIDADES!! \n";
+    cout<<"------------------------------ \n";
+    cout<<"        JUGADOR: "<<name<<"\n";
+    cout<<"------------------------------ \n";
+    cout<<"          BUNCOS:  "<<buncos<<"           \n";
+    cout<<"------------------------------ \n";
+    cout<<"      PUNTAJE TOTAL: "<<puntaje<<"\n";
+    cout<<"------------------------------ \n\n\n";
+    system("pause");
+    system("cls");
+}
+
 
 #endif // INTERFAZ_H_INCLUDED
