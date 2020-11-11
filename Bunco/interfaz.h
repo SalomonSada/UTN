@@ -36,6 +36,7 @@ void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fa
 }
 
 void finJuego_1jugador(string name, int puntaje, int buncos, int fallos, int lanzamientos)   {
+    cout<<"         FELICIDADES!! \n";
     cout<<"------------------------------ \n";
     cout<<"        JUGADOR: "<<name<<"\n";
     cout<<"------------------------------ \n";
@@ -66,7 +67,7 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
     system("cls");
 }
 
-void finJuego_2jugadores(string name, int puntaje, int buncos, int fallos, int lanzamientos)   {
+void finJuego_2jugadores(string name, int puntaje, int buncos)   {
     cout<<"         FELICIDADES!! \n";
     cout<<"------------------------------ \n";
     cout<<"        JUGADOR: "<<name<<"\n";

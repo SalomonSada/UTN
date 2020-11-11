@@ -164,9 +164,11 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     }
     else {
         if (puntaje1>puntaje2) {
+            finJuego_2jugadores(name, puntaje1, totalBuncos);
             return make_tuple(puntaje1, 1); /// gana player 1
         }
         else if (puntaje2>puntaje1) {
+            finJuego_2jugadores(name2, puntaje2, totalBuncos2);
             return make_tuple(puntaje2, 2); /// gana player 2
         }
         else {
