@@ -2,23 +2,31 @@
 #include <cstdlib>
 #include <tuple>
 #include <time.h>
+#include <conio.h>
+#include <cstring>
 
+#include "rlutil.h"
 using namespace std;
+using namespace rlutil;
 #include "opciones.h"
 #include "funciones.h"
 #include "interfaz.h"
+
+
+#define ABAJO 80
+#define ARRIBA 72
+#define ENTER 13
 
 int main () {
     int opciones;
     string name[2];
     int puntaje, jugadores; /// ---> high score
 
-    menu();
-    cin>>opciones;
-    system("cls");
     while (true) {
+        opciones=menu();
+        system("cls");
         switch(opciones) {
-            case 1: {
+            case 9: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
                 cin>>name[0];
                 system("cls");
@@ -28,7 +36,7 @@ int main () {
                 jugadores = get<1>(resultado);
             break;
             }
-            case 2: {
+            case 10: {
                 cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
                 cin>>name[0];
                 cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
@@ -39,11 +47,11 @@ int main () {
                 jugadores = get<1>(resultado);
             break;
             }
-            case 3:
+            case 11:
                 higher();
             break;
 
-            case 4: {
+            case 12: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
                 cin>>name[0];
                 system("cls");
@@ -53,19 +61,12 @@ int main () {
             break;
             }
 
-            case 5:
+            case 13:
                 cout<<"Gracias por usar nuestro programa. \n\n";
                 return 0;
             break;
         }
-        /// Caso de ingresar un dato equivocado:
-        if (opciones < 1 || opciones > 5) {
-            cout<<"\n\n"<<"Haz escogido "<<opciones<<". Selecciona una opcion valida, por favor. \n\n";
-            system("pause");
-            system("cls");
-        }
-        menu();
-        cin>>opciones;
+
     }
     return 0;
 }
