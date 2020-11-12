@@ -8,7 +8,7 @@
 	<iostream>
 	<cstdlib>
 
-1605213810 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
+1605222487 source:d:\usuarios\escritorio\bunco\utn\bunco\main.cpp
 	<iostream>
 	<cstdlib>
 	<tuple>
@@ -20,7 +20,7 @@
 	"funciones.h"
 	"interfaz.h"
 
-1605124685 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
+1605222487 d:\usuarios\escritorio\bunco\utn\bunco\opciones.h
 	<iostream>
 	<cstdlib>
 	<tuple>
@@ -31,14 +31,14 @@
 	<map>
 	<string>
 
-1605118696 d:\usuarios\escritorio\bunco\utn\bunco\funciones.h
+1605222487 d:\usuarios\escritorio\bunco\utn\bunco\funciones.h
 	<iostream>
 	<cstdlib>
 	<tuple>
 
-1605215625 d:\usuarios\escritorio\bunco\utn\bunco\interfaz.h
+1605222487 d:\usuarios\escritorio\bunco\utn\bunco\interfaz.h
 
-1603715401 d:\usuarios\escritorio\bunco\utn\bunco\rlutil.h
+1605222487 d:\usuarios\escritorio\bunco\utn\bunco\rlutil.h
 	<iostream>
 	<string>
 	<cstdio>
