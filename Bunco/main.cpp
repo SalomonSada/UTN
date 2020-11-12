@@ -23,8 +23,8 @@ int main () {
     int puntaje, jugadores; /// ---> high score
 
     while (true) {
-        opciones=menu();
-        system("cls");
+        opciones=menu();  /// ---> devolvera el valor de "y" en la funcion menu(). por eso el case comienza en 9
+         system("cls");
         switch(opciones) {
             case 9: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
@@ -66,7 +66,6 @@ int main () {
                 return 0;
             break;
         }
-
     }
     return 0;
 }

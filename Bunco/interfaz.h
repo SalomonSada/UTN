@@ -11,28 +11,28 @@ void tituloAnimado() {
         // primera linea
         setColor(YELLOW);
         setBackgroundColor(RED);
-        locate(10, 2); printf("%c", 201);
-        locate(10, 3); printf("%c", 177);
-        locate(10, 4); printf("%c", 200);
+        gotoxy(10, 2); printf("%c", 201);
+        gotoxy(10, 3); printf("%c", 177);
+        gotoxy(10, 4); printf("%c", 200);
 
 
         for (xcol = 11; xcol < 100; xcol++) {
-            locate(xcol, 2); printf("%c", 205);
-            locate(xcol, 4); printf("%c", 205);
+            gotoxy(xcol, 2); printf("%c", 205);
+            gotoxy(xcol, 4); printf("%c", 205);
             if(xcol==70) {
-                locate(40, 3); cout<<vtitulo;
-                locate(39, 2); printf("%c", 203);
-                locate(39, 3); printf("%c", 178);
-                locate(39, 4); printf("%c", 202);
-                locate(70, 2); printf("%c", 203);
-                locate(70, 3); printf("%c", 178);
-                locate(70, 4); printf("%c", 202);
+                gotoxy(40, 3); cout<<vtitulo;
+                gotoxy(39, 2); printf("%c", 203);
+                gotoxy(39, 3); printf("%c", 178);
+                gotoxy(39, 4); printf("%c", 202);
+                gotoxy(70, 2); printf("%c", 203);
+                gotoxy(70, 3); printf("%c", 178);
+                gotoxy(70, 4); printf("%c", 202);
             }
             Sleep(1);
         }
-        locate(100, 2); printf("%c", 187);
-        locate(100, 3); printf("%c", 177);
-        locate(100, 4); printf("%c", 188);
+        gotoxy(100, 2); printf("%c", 187);
+        gotoxy(100, 3); printf("%c", 177);
+        gotoxy(100, 4); printf("%c", 188);
 
 }
 
@@ -41,23 +41,23 @@ int menu() {
     tituloAnimado();
     setBackgroundColor(LIGHTRED);
     setColor(YELLOW);
-    locate(35, 8);  cout << "                                            " << endl;
-    locate(35, 9);  cout << "   1-Juego nuevo para UN jugador            " << endl;
-    locate(35, 10); cout << "   2-Juego nuevo para DOS jugadores         " << endl;
-    locate(35, 11); cout << "   3-Mostrar puntuacion mas alta            " << endl;
-    locate(35, 12); cout << "   4-Modo simulado (carga de datos manual)  " << endl;
-    locate(35, 13); cout << "   5-SALIR                                  " << endl;
-    locate(35, 14); cout << "                                            " << endl;
+    gotoxy(35, 8);  cout << "                                            " << endl;
+    gotoxy(35, 9);  cout << "   1-Juego nuevo para UN jugador            " << endl;
+    gotoxy(35, 10); cout << "   2-Juego nuevo para DOS jugadores         " << endl;
+    gotoxy(35, 11); cout << "   3-Mostrar puntuacion mas alta            " << endl;
+    gotoxy(35, 12); cout << "   4-Modo simulado (carga de datos manual)  " << endl;
+    gotoxy(35, 13); cout << "   5-SALIR                                  " << endl;
+    gotoxy(35, 14); cout << "                                            " << endl;
 
-    locate(31, 17); cout << "     Produced By: Salomon, Sofia y Estanislao     ";
-    locate(31, 18); cout << "                                                  " << endl;
-    locate(31, 19); cout << "        Menu creado usando libreria RLUTIL        ";
+    gotoxy(31, 17); cout << "     Produced By: Salomon, Sofia y Estanislao     ";
+    gotoxy(31, 18); cout << "                                                  " << endl;
+    gotoxy(31, 19); cout << "        Menu creado usando libreria RLUTIL        ";
 
 
-    locate(x, y); cout<<"*"; //a partir de aca es para utilizar las flechas del teclado
+    gotoxy(x, y); cout<<"*"; //a partir de aca es para utilizar las flechas del teclado
     while (true) {
         if (_kbhit()) {
-            locate(x, y); cout<<" ";
+            gotoxy(x, y); cout<<" ";
             char tecla = _getch();
             if (tecla == ENTER) {
                 setBackgroundColor(BLACK);
@@ -66,7 +66,7 @@ int menu() {
             }
             if (tecla == ARRIBA && y > 9) y--;
             if (tecla == ABAJO && y < 13) y++;
-            locate(x, y); cout<<"*";
+            gotoxy(x, y); cout<<"*";
         }
     }
 }
