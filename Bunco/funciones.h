@@ -3,28 +3,42 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <tuple>
-
+#include <time.h>
+#include "rlutil.h"
+using namespace rlutil;
 using namespace std;
 
-int cargarDados(int v[], int tam, int limite){
-    cout<<"A lanzar los dados, BUENA SUERTE!! \n\n";
-    system("pause");
+#include "interfaz.h"
+//#define ENTER 13
+
+int presioneEnter() {
+    while (true) {
+        if (_kbhit()) {
+            char tecla = _getch();
+            if (tecla == ENTER) return 1;
+        }
+    }
+}
+
+void cargarDados(int v[], int tam, int limite){
+    locate(33,14);cout<<"A lanzar los dados, presione ENTER, BUENA SUERTE!!";
+    presioneEnter();
     srand(time(NULL));
     for(int i=0; i<tam; i++ ){
         v[i]=(rand()%limite)+1;
     }
 }
 
-int cargarDadosSimulado(int dados[], int tam) {
-    cout<<"Ingresa los tres dados: \n";
-    for (int i=0; i<tam; i++) cin>>dados[i];
+void cargarDadosSimulado(int dados[], int tam) {
+    locate(37,14); cout<<"Ingresar los dados:";
+    for (int i=0; i<tam*2; i+=2) {
+        locate(57+i,14);
+        cin>>dados[i/2];
+    }
 }
 
-int mostrarDados(int dados[], int tam) {
-    cout<<endl<<"  DADOS: ";
-    for (int i=0; i<tam; i++) cout<<dados[i]<<", ";
-    cout<<endl;
+void mostrarDados(int dados[]) {
+    dadoPosuno(dados[0]); dadoPosDos(dados[1]); dadoPosTres(dados[2]);
 }
 
 int maximo(int v[], int tam) {
@@ -99,8 +113,8 @@ int evaluarDados (int dados[], int tam, int ronda) {
 
     pos = maximo(puntos, 5);
 
-    cout<<"PUNTAJE: "<<puntos[pos]<<endl;
-    cout<<"SACASTE: ";
+    locate(42,21); cout<<"PUNTAJE TIRADA: "<<puntos[pos];
+    locate(42,22); cout<<"       SACASTE: ";
     if (puntos[pos] != 0) {
         switch (pos) {
             case 0: cout<<"BUNCO!!!  \n\n";

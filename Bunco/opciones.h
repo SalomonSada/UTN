@@ -1,10 +1,8 @@
 #ifndef OPCIONES_H_INCLUDED
 #define OPCIONES_H_INCLUDED
 
-#include <iostream>
-#include <cstdlib>
-#include <tuple>
-using namespace std;
+
+
 
 #include "funciones.h"
 #include "interfaz.h"
@@ -28,17 +26,15 @@ using namespace std;
     DOS JUGADORES ---> El primer jugador que sume un puntaje >= 21.
     En caso de que el primer jugador cumpla esa condicion en el primer turno. El segundo jugador tiene la oportunidad de usar su turno. */
 
-tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
-    int dados[3], i, d;
+tuple<int, int, int> jugar(string name, string name2, int jugadores, bool azar) {
+    int dados[3], i;
     int result;
 
-/// -----> Player 1 <-----
     int puntaje1=0;
     int totalBuncos=0;
     int fallido=0;
     int lanzamiento1 = 1;
 
-/// -----> Player 2 <-----
     int puntaje2=0;
     int totalBuncos2=0;
     int lanzamiento2 = 1;
@@ -60,10 +56,11 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
 ///         --------> Tirar los dados segun modalidad <--------
                 if (azar==false) {
                     cargarDadosSimulado(dados, 3);
+                    mostrarDados(dados);
                 }
                 else {
                     cargarDados(dados, 3, 6);
-                    mostrarDados(dados, 3);
+                    mostrarDados(dados);
                 }
 
 ///         ---------------> Evaluar los dados <---------------
@@ -119,10 +116,11 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
 
                     if (azar==false) {
                     cargarDadosSimulado(dados, 3);
+                    mostrarDados(dados);
                     }
                     else {
                         cargarDados(dados, 3, 6);
-                        mostrarDados(dados, 3);
+                        mostrarDados(dados);
                     }
 
                     result = evaluarDados(dados, 3, i);
@@ -132,7 +130,6 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
                         fallido++;
                         if (jugadores==2) {
                             turno_player_2=false;
-                            cout<<endl<<"MIRA"<<endl;
                         }
                     }
 
@@ -160,25 +157,28 @@ tuple<int, int> jugar(string name, string name2, int jugadores, bool azar) {
     if (jugadores==1) {
         puntaje1-=(fallido*2);
         finJuego_1jugador(name,puntaje1,totalBuncos,fallido,lanzamiento1-1);
-        return make_tuple(puntaje1, 1);
+        return make_tuple(puntaje1, 1, totalBuncos);
     }
     else {
         if (puntaje1>puntaje2) {
             finJuego_2jugadores(name, puntaje1, totalBuncos);
-            return make_tuple(puntaje1, 1); /// gana player 1
+            return make_tuple(puntaje1, 1, totalBuncos); /// gana player 1
         }
         else if (puntaje2>puntaje1) {
             finJuego_2jugadores(name2, puntaje2, totalBuncos2);
-            return make_tuple(puntaje2, 2); /// gana player 2
+            return make_tuple(puntaje2, 2, totalBuncos2); /// gana player 2
         }
         else {
-            return make_tuple(0, 0); /// empate
+            return make_tuple(0, 0, 0); /// empate
         }
     }
 }
 
-void higher() {
-    cout<<"Puntaje mas alto: \n\n"<<"Nombre del jugador: "<<"XXX"<<" | Cantidad de Buncos (Esto sera una variable) \n\n";
+void higher(int puntaje, string name, int buncos) {
+    if (puntaje>0) {
+        cout<<"Puntaje mas alto: "<<puntaje<<" | Nombre del jugador: "<<name<<" | Cantidad de Buncos "<<buncos<<"\n\n";
+    }
+    else cout<<"No se han registrado partidas aun \n\n";
     system("pause");
     system("cls");
 }

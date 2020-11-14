@@ -4,6 +4,8 @@
 #define ABAJO 80
 #define ARRIBA 72
 #define ENTER 13
+#include "rlutil.h"
+using namespace rlutil;
 
 void tituloAnimado() {
     int xcol;
@@ -54,10 +56,10 @@ int menu() {
     gotoxy(31, 19); cout << "        Menu creado usando libreria RLUTIL        ";
 
 
-    gotoxy(x, y); cout<<"*"; //a partir de aca es para utilizar las flechas del teclado
+    gotoxy(x, y); printf(" %c", 16); //a partir de aca es para utilizar las flechas del teclado
     while (true) {
         if (_kbhit()) {
-            gotoxy(x, y); cout<<" ";
+            gotoxy(x, y); cout<<"   ";
             char tecla = _getch();
             if (tecla == ENTER) {
                 setBackgroundColor(BLACK);
@@ -66,24 +68,76 @@ int menu() {
             }
             if (tecla == ARRIBA && y > 9) y--;
             if (tecla == ABAJO && y < 13) y++;
-            gotoxy(x, y); cout<<"*";
+            gotoxy(x, y); printf(" %c", 16);
         }
     }
 }
 
 void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int puntos){
-    cout<<"TURNO DE "<<name<<" | RONDA NRO "<<ronda<<" | PUNTAJE ACUMULADO: "<<puntaje+puntos<<endl;
-    cout<<"------------------------------------------------------- \n";
-    cout<<"VECES QUE OBTUVO BUNCO: "<<buncos<<endl;
-    cout<<"------------------------------------------------------- \n";
-    cout<<"LANZAMIENTO NRO "<<lanzamientos<<"\n";
-    cout<<"------------------------------------------------------- \n\n";
+    int xcol;
+    for (xcol = 25; xcol < 90; xcol++) {
+        locate(xcol, 7); printf("%c", 205);
+        locate(xcol, 13); printf("%c", 205);
+        locate(xcol, 9); printf("%c", 205);
+        locate(xcol, 11); printf("%c", 205);
+
+        if(xcol==70) {
+            locate(30, 8); cout<<"  TURNO DE "<<name<<" | RONDA NRO "<<ronda<<" | PUNTAJE ACUMULADO: "<<puntaje+puntos;
+            locate(25, 7); printf("%c", 201);
+            locate(90, 7); printf("%c", 187);
+            locate(25, 8); printf("%c", 186);
+            locate(90, 8); printf("%c", 186);
+
+            //locate(26, 9); cout<<"----------------------------------------------------------------\n";
+            locate(25, 7); printf("%c", 205);
+            locate(25, 9); printf("%c", 204);
+            locate(90, 9); printf("%c", 185);
+
+            locate(25, 10); cout<<"                     VECES QUE OBTUVO BUNCO:"<<buncos<<"                    \n";
+            locate(25, 7); printf("%c", 201);
+            locate(25, 10); printf("%c", 186);
+            locate(90, 10); printf("%c", 186);
+
+            locate(25, 7); printf("%c", 201);
+            locate(25, 11); printf("%c", 204);
+            locate(90, 11); printf("%c", 185);
+
+            locate(25, 12); cout<<"                         LANZAMIENTO NRO "<<lanzamientos<<"                      \n";
+            locate(25, 7); printf("%c", 201);
+            locate(25, 12); printf("%c", 186);
+            locate(90, 12); printf("%c", 186);
+            locate(90, 13); printf("%c", 188);
+            locate(25, 13); printf("%c", 200);
+        }
+    }
+    setColor(WHITE);
+    setBackgroundColor(BLACK);
 }
 
 void ptsRonda(int puntaje) {
-    cout<<"***************************    \n";
-    cout<<"| PUNTAJE DE LA RONDA: "<<puntaje<<" | \n";
-    cout<<"*************************** \n\n";
+    int xcol;
+
+    for (xcol = 40; xcol < 75; xcol++) {
+        locate(xcol, 24); printf("%c", 205);
+        locate(xcol, 26); printf("%c", 205);
+        if(xcol==70) {
+            locate(30, 7); printf("%c", 205);
+            locate(40, 25); cout<<"       PUNTAJE DE LA RONDA: "<<puntaje<<"      \n";
+            locate(40, 25); printf("%c", 186);
+            locate(40, 24); printf("%c", 201);
+            locate(40, 26); printf("%c", 200);
+            locate(75, 24); printf("%c", 187);
+            locate(75, 25); printf("%c", 186);
+            locate(75, 26); printf("%c", 188);
+        }
+    }
+    locate(35, 27);  cout << "";
+    locate(35, 28);  cout << "";
+    locate(35, 29);  cout << "";
+    locate(35, 30);  cout << "";
+
+    setColor(WHITE);
+    setBackgroundColor(BLACK);
 }
 
 void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fallos, int lanzamientos)   {
@@ -93,7 +147,7 @@ void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fa
     cout<<"    PUNTAJE "<<name<<":"<<puntaje<<" PUNTOS     \n";
     cout<<"          Buncos:  "<<buncos<<"           \n";
     cout<<"      Tiradas Fallidas:"<<fallos<<"     \n";
-    cout<<"        Lanzamientos:"<<lanzamientos<<"       \n";
+    cout<<"        Lanzamientos:"<<lanzamientos-1<<"       \n";
     cout<<"------------------------------ \n\n\n";
     system("pause");
     system("cls");
@@ -106,7 +160,7 @@ void finJuego_1jugador(string name, int puntaje, int buncos, int fallos, int lan
     cout<<"------------------------------ \n";
     cout<<"          BUNCOS:  "<<buncos<<"           \n";
     cout<<"      TIRADAS FALLIDAS:"<<fallos<<"     \n";
-    cout<<"        LANZAMIENTOS:"<<lanzamientos<<"       \n";
+    cout<<"        LANZAMIENTOS:"<<lanzamientos-1<<"       \n";
     cout<<"------------------------------ \n";
     cout<<"      PUNTAJE TOTAL: "<<puntaje<<"\n";
     cout<<"------------------------------ \n\n\n";
@@ -144,5 +198,118 @@ void finJuego_2jugadores(string name, int puntaje, int buncos)   {
     system("cls");
 }
 
+///             |||............................................DADOS............................................|||
+
+void dadoUno(int x) {
+    locate(x+4,18); printf("%c", 254); // medio
+}
+
+void dadoDos(int x) {
+    locate(x+2,17); printf("%c", 254); // arriba, izquierda
+    locate(x+6,19); printf("%c", 254); // abajo, derecha
+}
+
+void dadoTres(int x) {
+    locate(x+2,17); printf("%c", 254);
+    locate(x+4,18); printf("%c", 254);
+    locate(x+6,19); printf("%c", 254);
+}
+
+void dadoCuatro(int x) {
+    locate(x+2,17); printf("%c", 254);
+    locate(x+2,19); printf("%c", 254);
+    locate(x+6,17); printf("%c", 254);
+    locate(x+6,19); printf("%c", 254);
+}
+
+void dadoCinco(int x) {
+    locate(x+2,17); printf("%c", 254);
+    locate(x+4,18); printf("%c", 254);
+    locate(x+6,19); printf("%c", 254);
+    locate(x+2,19); printf("%c", 254);
+    locate(x+6,17); printf("%c", 254);
+}
+
+void dadoSeis(int x) {
+    locate(x+2,17); printf("%c", 254);
+    locate(x+2,19); printf("%c", 254);
+    locate(x+2,18); printf("%c", 254);
+    locate(x+6,18); printf("%c", 254);
+    locate(x+6,17); printf("%c", 254);
+    locate(x+6,19); printf("%c", 254);
+}
+
+void escogerDado(int posDado, int dado) {
+    switch (posDado) {
+    case 1:    dadoUno(44+dado);
+        break;
+    case 2:    dadoDos(44+dado);
+        break;
+    case 3:   dadoTres(44+dado);
+        break;
+    case 4: dadoCuatro(44+dado);
+        break;
+    case 5:  dadoCinco(44+dado);
+        break;
+    case 6:   dadoSeis(44+dado);
+        break;
+    }
+}
+void dadoPosuno(int dado) {
+    escogerDado(dado, 0); /// dado = el numero de dado que corresponde mostrar || 0 = posicion a sumar a eje x
+    // EJE X
+    for (int i = 44; i < 52; i++) {
+        locate(i, 16); printf("%c", 196);
+        locate(i, 20); printf("%c", 196);
+    }
+    // EJE Y
+    for (int i = 16; i < 20; i++) {
+        locate(44, i); printf("%c", 179);
+        locate(52, i); printf("%c", 179);
+    }
+    ///ESQUINAS
+    locate(44, 16); printf("%c", 218);
+    locate(44, 20); printf("%c", 192);
+    locate(52, 16); printf("%c", 191);
+    locate(52, 20); printf("%c", 217);
+}
+
+void dadoPosDos(int dado) {
+    escogerDado(dado, 10); /// dado = el numero de dado que corresponde mostrar || 10 = posicion a sumar a eje x
+    // EJE X
+    for (int i = 54; i < 62; i++) {
+        locate(i, 16); printf("%c", 196);
+        locate(i, 20); printf("%c", 196);
+    }
+    // EJE Y
+    for (int i = 16; i < 20; i++) {
+        locate(54, i); printf("%c", 179);
+        locate(62, i); printf("%c", 179);
+    }
+    ///ESQUINAS
+    locate(54, 16); printf("%c", 218);
+    locate(54, 20); printf("%c", 192);
+    locate(62, 16); printf("%c", 191);
+    locate(62, 20); printf("%c", 217);
+}
+
+void dadoPosTres(int dado) {
+    escogerDado(dado, 20);  /// dado = el numero de dado que corresponde mostrar || 20 = posicion a sumar a eje x
+    // EJE X
+for (int i = 64; i < 72; i++) {
+        locate(i, 16); printf("%c", 196);
+        locate(i, 20); printf("%c", 196);
+    }
+    // EJE Y
+    for (int i = 16; i < 20; i++) {
+        locate(64, i); printf("%c", 179);
+        locate(72, i); printf("%c", 179);
+    }
+    // ESQUINAS
+    locate(64, 16); printf("%c", 218);
+    locate(64, 20); printf("%c", 192);
+    locate(72, 16); printf("%c", 191);
+    locate(72, 20); printf("%c", 217);
+}
 
 #endif // INTERFAZ_H_INCLUDED

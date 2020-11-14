@@ -1,17 +1,15 @@
 #include <iostream>
 #include <cstdlib>
 #include <tuple>
-#include <time.h>
 #include <conio.h>
 #include <cstring>
 
 #include "rlutil.h"
-using namespace std;
-using namespace rlutil;
 #include "opciones.h"
 #include "funciones.h"
 #include "interfaz.h"
-
+using namespace std;
+using namespace rlutil;
 
 #define ABAJO 80
 #define ARRIBA 72
@@ -20,10 +18,10 @@ using namespace rlutil;
 int main () {
     int opciones;
     string name[2];
-    int puntaje, jugadores; /// ---> high score
+    int puntaje, jugadores, buncos;
 
     while (true) {
-        opciones=menu();  /// ---> devolvera el valor de "y" en la funcion menu(). por eso el case comienza en 9
+        opciones=menu();
          system("cls");
         switch(opciones) {
             case 9: {
@@ -34,6 +32,7 @@ int main () {
                 auto resultado = jugar(name[0], "", 1, true);
                 puntaje = get<0>(resultado);
                 jugadores = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
             case 10: {
@@ -45,10 +44,11 @@ int main () {
                 auto resultado = jugar(name[0], name[1], 2, true);
                 puntaje = get<0>(resultado);
                 jugadores = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
             case 11:
-                higher();
+                higher(puntaje, name[0], buncos);
             break;
 
             case 12: {
@@ -58,6 +58,7 @@ int main () {
                 auto resultado = jugar(name[0], "", 1, false); /// True a revisar
                 puntaje = get<0>(resultado);
                 jugadores = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
 
@@ -67,5 +68,4 @@ int main () {
             break;
         }
     }
-    return 0;
 }
