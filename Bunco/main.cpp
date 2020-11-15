@@ -16,9 +16,17 @@ using namespace rlutil;
 #define ENTER 13
 
 int main () {
+    /// para usar en menu, y parametros
     int opciones;
-    string name[2];
-    int puntaje, jugadores, buncos;
+    string nombre[2];
+
+    /// almacenar los datos que devolveran las funciones
+    int puntaje=0, buncos;
+    string nombreJ;
+
+    /// almacenar los datos del jugador con el puntaje mas alto
+    int puntajeGanador=0, buncosGanador;
+    string nombreGanador;
 
     while (true) {
         opciones=menu();
@@ -26,46 +34,52 @@ int main () {
         switch(opciones) {
             case 9: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 system("cls");
 
-                auto resultado = jugar(name[0], "", 1, true);
+                auto resultado = jugar(nombre[0], "", 1, true);
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
+                nombreJ = get<1>(resultado);
                 buncos = get<2>(resultado);
             break;
             }
             case 10: {
                 cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
-                cin>>name[1];
+                cin>>nombre[1];
                 system("cls");
-                auto resultado = jugar(name[0], name[1], 2, true);
+                auto resultado = jugar(nombre[0], nombre[1], 2, true);
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
+                nombreJ = get<1>(resultado);
                 buncos = get<2>(resultado);
             break;
             }
             case 11:
-                higher(puntaje, name[0], buncos);
+                higher(puntajeGanador, nombreGanador, buncosGanador);
             break;
 
             case 12: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 system("cls");
-                auto resultado = jugar(name[0], "", 1, false); /// True a revisar
+                auto resultado = jugar(nombre[0], "", 1, false); /// True a revisar
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
+                nombreJ = get<1>(resultado);
                 buncos = get<2>(resultado);
             break;
             }
 
             case 13:
-                cout<<"Gracias por usar nuestro programa. \n\n";
+                salir();
                 return 0;
             break;
+        }
+
+        if (puntaje>puntajeGanador) {
+            puntajeGanador=puntaje;
+            buncosGanador=buncos;
+            nombreGanador=nombreJ;
         }
     }
 }

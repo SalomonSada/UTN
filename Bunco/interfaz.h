@@ -141,59 +141,297 @@ void ptsRonda(int puntaje) {
 }
 
 void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fallos, int lanzamientos)   {
-    cout<<"------------------------------ \n";
-    cout<<"        RONDA Nro "<<ronda<<"\n";
-    cout<<"------------------------------ \n";
-    cout<<"    PUNTAJE "<<name<<":"<<puntaje<<" PUNTOS     \n";
-    cout<<"          Buncos:  "<<buncos<<"           \n";
-    cout<<"      Tiradas Fallidas:"<<fallos<<"     \n";
-    cout<<"        Lanzamientos:"<<lanzamientos-1<<"       \n";
-    cout<<"------------------------------ \n\n\n";
+    int xcol;
+                for (xcol = 25; xcol < 90; xcol++) {
+                locate(xcol, 7); printf("%c", 205);
+                locate(xcol, 15); printf("%c", 205);
+                locate(xcol, 9); printf("%c", 205);
+                locate(xcol, 11); printf("%c", 205);
+                locate(xcol, 13); printf("%c", 205);
+                locate(xcol, 17); printf("%c", 205);
+
+                if(xcol==70) {
+                locate(25, 8); cout<<"                             RONDA Nro"<<ronda<<"                          \n";
+                locate(25, 7); printf("%c", 201);
+                locate(90, 7); printf("%c", 187);
+                locate(25, 8); printf("%c", 186);
+                locate(90, 8); printf("%c", 186);
+
+                locate(25, 7); printf("%c", 205);
+                locate(25, 9); printf("%c", 204);
+                locate(90, 9); printf("%c", 185);
+
+                locate(25, 10); cout<<"                       PUNTAJE "<<name<<":"<<puntaje<<" PUNTOS                    \n";
+                locate(25, 7); printf("%c", 201);
+                locate(25, 10); printf("%c", 186);
+                locate(90, 10); printf("%c", 186);
+
+                locate(25, 7); printf("%c", 201);
+                locate(25, 11); printf("%c", 204);
+                locate(90, 11); printf("%c", 185);
+
+                locate(25, 12); cout<<"                              Buncos:"<<buncos<<"                            \n";
+                locate(25, 7); printf("%c", 201);
+                locate(25, 12); printf("%c", 186);
+                locate(90, 12); printf("%c", 186);
+
+                locate(25, 14); cout<<"                         Tiradas Fallidas:"<<fallos<<"                       \n";
+                locate(25, 13); printf("%c", 204);
+                locate(25, 15); printf("%c", 204);
+                locate(90, 15); printf("%c", 185);
+                locate(90, 13); printf("%c", 185);
+
+                locate(25, 16); cout<<"                          Lanzamientos:"<<lanzamientos<<"                         \n";
+                locate(25, 14); printf("%c", 186);
+                locate(90, 14); printf("%c", 186);
+                locate(25, 17); printf("%c", 200);
+                locate(90, 17); printf("%c", 188);
+                locate(25, 16); printf("%c", 186);
+                locate(90, 16); printf("%c", 186);
+
+                }
+               // Sleep(1);
+                }
+                locate(35, 20);  cout << "";
+                locate(35, 21);  cout << "";
+                locate(35, 22);  cout << "";
+                locate(35, 23);  cout << "";
     system("pause");
     system("cls");
 }
 
 void finJuego_1jugador(string name, int puntaje, int buncos, int fallos, int lanzamientos)   {
-    cout<<"         FELICIDADES!! \n";
-    cout<<"------------------------------ \n";
-    cout<<"        JUGADOR: "<<name<<"\n";
-    cout<<"------------------------------ \n";
-    cout<<"          BUNCOS:  "<<buncos<<"           \n";
-    cout<<"      TIRADAS FALLIDAS:"<<fallos<<"     \n";
-    cout<<"        LANZAMIENTOS:"<<lanzamientos-1<<"       \n";
-    cout<<"------------------------------ \n";
-    cout<<"      PUNTAJE TOTAL: "<<puntaje<<"\n";
-    cout<<"------------------------------ \n\n\n";
+    int xcol;
+    setBackgroundColor(BLACK);
+    setColor(WHITE);
+    for (xcol = 40; xcol < 75; xcol++) {
+        locate(xcol, 24); printf("%c", 205);
+        locate(xcol, 26); printf("%c", 205);
+
+        locate(40, 25); cout<<"       PUNTAJE TOTAL: "<<puntaje<<"    \n";
+        locate(40, 25); printf("%c", 186);
+        locate(40, 24); printf("%c", 201);
+        locate(40, 26); printf("%c", 200);
+        locate(75, 24); printf("%c", 187);
+        locate(75, 25); printf("%c", 186);
+        locate(75, 26); printf("%c", 188);
+    }
+    for (xcol = 52; xcol < 66;xcol++){
+        locate(53, 4); cout<<"FELICIDADES!!\n";
+        locate(xcol, 3); printf("%c", 205);
+        locate(xcol, 5); printf("%c", 205);
+    }
+    for (xcol = 25; xcol < 90; xcol++) {
+        locate(xcol, 7); printf("%c", 205);
+        locate(xcol, 9); printf("%c", 205);
+        locate(xcol, 11); printf("%c", 205);
+        locate(xcol, 13); printf("%c", 205);
+        locate(xcol, 15); printf("%c", 205);
+        locate(xcol, 17); printf("%c", 205);
+
+        if(xcol==70) {
+            locate(52, 3); printf("%c", 201);
+            locate(52, 4); printf("%c", 186);
+            locate(52, 5); printf("%c", 200);
+            locate(66, 3); printf("%c", 187);
+            locate(66, 4); printf("%c", 186);
+            locate(66, 5); printf("%c", 188);
+
+            locate(25, 8); cout<<"                       PUNTAJE "<<name<<":"<<puntaje<<" PUNTOS                    \n";
+            locate(25, 7); printf("%c", 201);
+            locate(90, 7); printf("%c", 187);
+            locate(25, 8); printf("%c", 186);
+            locate(90, 8); printf("%c", 186);
+
+            locate(25, 7); printf("%c", 205);
+            locate(25, 9); printf("%c", 204);
+            locate(90, 9); printf("%c", 185);
+
+            locate(25, 10); cout<<"                           JUGADOR: "<<name<<"                         \n";
+            locate(25, 7); printf("%c", 201);
+            locate(25, 10); printf("%c", 186);
+            locate(90, 10); printf("%c", 186);
+
+            locate(25, 7); printf("%c", 201);
+            locate(25, 11); printf("%c", 204);
+            locate(90, 11); printf("%c", 185);
+
+
+            locate(25, 12); cout<<"                             BUNCOS: "<<buncos<<"                          \n";
+            locate(25, 7); printf("%c", 201);
+            locate(25, 12); printf("%c", 186);
+            locate(90, 12); printf("%c", 186);
+
+            locate(25, 14); cout<<"                         TIRADAS FALLIDAS: "<<fallos<<"                       \n";
+            locate(25, 13); printf("%c", 204);
+            locate(25, 15); printf("%c", 204);
+            locate(90, 15); printf("%c", 185);
+            locate(90, 13); printf("%c", 185);
+
+            locate(25, 16); cout<<"                           LANZAMIENTOS: "<<lanzamientos<<"                        \n";
+            locate(25, 14); printf("%c", 186);
+            locate(90, 14); printf("%c", 186);
+            locate(25, 17); printf("%c", 200);
+            locate(90, 17); printf("%c", 188);
+            locate(25, 16); printf("%c", 186);
+            locate(90, 16); printf("%c", 186);
+
+            locate(25, 14); printf("%c", 186);
+            locate(90, 14); printf("%c", 186);
+            locate(25, 16); printf("%c", 186);
+            locate(90, 16); printf("%c", 186);
+
+        }
+            Sleep(1);
+    }
+    locate(2, 26);  cout << "";
+    locate(2, 27);  cout << "";
+    locate(2, 28);  cout << "";
+    locate(2, 29);  cout << "";
     system("pause");
     system("cls");
 }
 
 void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, int puntaje2, int buncos1, int buncos2, int proxTurno) {
-    cout<<"------------------------------ \n";
-    cout<<"        RONDA Nro "<<ronda<<"\n";
-    cout<<"    PROXIMO TURNO: ";
-    if (proxTurno==1) cout<<name1;
-    else cout<<name2;
-    cout<<"\n------------------------------ \n";
-    cout<<"  PUNTAJE "<<name1<<": "<<puntaje1<<" PUNTOS \n";
-    cout<<"    CANTIDAD DE BUNCOS: "<<buncos1<<endl;
-    cout<<"------------------------------ \n";
-    cout<<"  PUNTAJE "<<name2<<": "<<puntaje2<<" PUNTOS \n";
-    cout<<"    CANTIDAD DE BUNCOS: "<<buncos2<<endl;
-    cout<<"------------------------------ \n\n\n";
+    int xcol;
+                for (xcol = 25; xcol < 90; xcol++) {
+                locate(xcol, 7); printf("%c", 205);
+                locate(xcol, 15); printf("%c", 205);
+            //    locate(xcol, 9); printf("%c", 205);
+                locate(xcol, 11); printf("%c", 205);
+            //  locate(xcol, 13); printf("%c", 205);
+            //    locate(xcol, 17); printf("%c", 205);
+                locate(xcol, 19); printf("%c", 205);
+
+                if(xcol==70) {
+                locate(25, 8); cout<<"                             RONDA Nro"<<ronda<<"                          \n";
+                locate(25, 7); printf("%c", 201);
+                locate(90, 7); printf("%c", 187);
+                locate(25, 8); printf("%c", 186);
+                locate(90, 8); printf("%c", 186);
+
+                locate(25, 7); printf("%c", 205);
+                locate(25, 9); printf("%c", 204);
+                locate(90, 9); printf("%c", 185);
+
+                locate(25, 10); cout<<"                        PROXIMO TURNO: ";
+                locate(25, 7); printf("%c", 201);
+                locate(25, 10); printf("%c", 186);
+                locate(90, 10); printf("%c", 186);
+                if (proxTurno==1){
+                    locate(63, 10);cout<<name1;
+                }
+                else {locate(63, 10); cout<<name2;}
+
+                locate(25, 7); printf("%c", 201);
+                locate(25, 11); printf("%c", 204);
+                locate(90, 11); printf("%c", 185);
+
+
+                locate(25, 12); cout<<"                      PUNTAJE "<<name1<<": "<<puntaje1<<" PUNTOS \n";
+                locate(25, 7); printf("%c", 201);
+                locate(25, 12); printf("%c", 186);
+                locate(90, 12); printf("%c", 186);
+
+                locate(25, 14); cout<<"                       CANTIDAD DE BUNCOS: "<<buncos1<<endl;
+                locate(25, 13); printf("%c", 204);
+                locate(25, 15); printf("%c", 204);
+                locate(90, 15); printf("%c", 185);
+                locate(90, 13); printf("%c", 185);
+
+                locate(25, 16); cout<<"                      PUNTAJE "<<name2<<": "<<puntaje2<<" PUNTOS \n";
+                locate(25, 14); printf("%c", 186);
+                locate(90, 14); printf("%c", 186);
+                locate(25, 17); printf("%c", 204);
+                locate(90, 17); printf("%c", 185);
+                locate(25, 16); printf("%c", 186);
+                locate(90, 16); printf("%c", 186);
+
+                locate(25, 18);cout<<"                       CANTIDAD DE BUNCOS: "<<buncos2<<endl;
+                locate(25, 18); printf("%c", 186);
+                locate(25, 19); printf("%c", 200);
+                locate(90, 18); printf("%c", 186);
+                locate(90, 19); printf("%c", 188);
+
+                }
+                Sleep(1);
+                }
+                locate(35, 20);  cout << "";
+                locate(35, 21);  cout << "";
+                locate(35, 22);  cout << "";
+                locate(35, 23);  cout << "";
     system("pause");
     system("cls");
 }
 
 void finJuego_2jugadores(string name, int puntaje, int buncos)   {
-    cout<<"         FELICIDADES!! \n";
-    cout<<"------------------------------ \n";
-    cout<<"        JUGADOR: "<<name<<"\n";
-    cout<<"------------------------------ \n";
-    cout<<"          BUNCOS:  "<<buncos<<"           \n";
-    cout<<"------------------------------ \n";
-    cout<<"      PUNTAJE TOTAL: "<<puntaje<<"\n";
-    cout<<"------------------------------ \n\n\n";
+    int xcol;
+                setBackgroundColor(BLACK);
+                setColor(WHITE);
+                for (xcol = 52; xcol < 66;xcol++){
+                locate(53, 4); cout<<"FELICIDADES!!\n";
+
+
+
+                locate(xcol, 3); printf("%c", 205);
+                locate(xcol, 5); printf("%c", 205);
+                }
+                for (xcol = 45; xcol < 74; xcol++) {
+                locate(xcol, 7); printf("%c", 205);
+                locate(xcol, 9); printf("%c", 205);
+                locate(xcol, 11); printf("%c", 205);
+                locate(xcol, 13); printf("%c", 205);
+
+                if(xcol==70) {
+                locate(25, 12); cout<<"                         PUNTAJE TOTAL: "<<puntaje<<"            \n";
+                locate(25, 8); cout<<"                           JUGADOR: "<<name<<"                         \n";
+                locate(25, 10); cout<<"                             BUNCOS: "<<buncos<<"                          \n";
+                locate(52, 3); printf("%c", 201);
+                locate(52, 4); printf("%c", 186);
+                locate(52, 5); printf("%c", 200);
+                locate(66, 3); printf("%c", 187);
+                locate(66, 4); printf("%c", 186);
+                locate(66, 5); printf("%c", 188);
+
+
+                locate(45, 7); printf("%c", 201);
+                locate(74, 7); printf("%c", 187);
+                locate(45, 8); printf("%c", 186);
+                locate(74, 8); printf("%c", 186);
+
+                locate(45, 7); printf("%c", 205);
+                locate(45, 9); printf("%c", 204);
+                locate(74, 9); printf("%c", 185);
+
+
+                locate(45, 7); printf("%c", 201);
+                locate(45, 10); printf("%c", 186);
+                locate(74, 10); printf("%c", 186);
+
+                locate(45, 7); printf("%c", 201);
+                locate(45, 11); printf("%c", 204);
+                locate(74, 11); printf("%c", 185);
+
+
+
+                locate(45, 7); printf("%c", 201);
+                locate(45, 12); printf("%c", 186);
+                locate(74, 12); printf("%c", 186);
+
+                locate(45, 13); printf("%c", 200);
+                locate(74, 13); printf("%c", 188);
+
+                }
+                Sleep(1);
+                }
+                locate(2, 26);  cout << "";
+                locate(2, 27);  cout << "";
+                locate(2, 28);  cout << "";
+                locate(2, 29);  cout << "";
+
+                setColor(WHITE);
+                setBackgroundColor(BLACK);
+
     system("pause");
     system("cls");
 }
@@ -255,7 +493,7 @@ void escogerDado(int posDado, int dado) {
         break;
     }
 }
-void dadoPosuno(int dado) {
+void dadoPosUno(int dado) {
     escogerDado(dado, 0); /// dado = el numero de dado que corresponde mostrar || 0 = posicion a sumar a eje x
     // EJE X
     for (int i = 44; i < 52; i++) {
@@ -310,6 +548,34 @@ for (int i = 64; i < 72; i++) {
     locate(64, 20); printf("%c", 192);
     locate(72, 16); printf("%c", 191);
     locate(72, 20); printf("%c", 217);
+}
+
+void salir() {
+    int xcol;
+    setColor(YELLOW); setBackgroundColor(RED);
+    for (xcol = 45; xcol < 79; xcol++){
+        locate(xcol,6); printf("%c",205);
+        locate(xcol,8); printf("%c",205);
+        locate(xcol,10); printf("%c",205);
+    }
+
+    locate(46,7); cout<<"   Gracias por haber jugado!!   ";
+    locate(46,9); cout<<" By Sofia, Estanislao & Salom"; printf("%c",162); cout<<"n ";
+    locate(45,6); printf("%c",201);
+    locate(45,7); printf("%c",186);
+    locate(45,8); printf("%c",204);
+    locate(45,9); printf("%c",186);
+    locate(45,10); printf("%c",200);
+    locate(78,6); printf("%c",187);
+    locate(78,7); printf("%c",186);
+    locate(78,8); printf("%c",185);
+    locate(78,9); printf("%c",186);
+    locate(78,10); printf("%c",188);
+
+    locate(50,26); cout<<"";
+    locate(50,27); cout<<"";
+    locate(50,28); cout<<"";
+    setColor(WHITE); setBackgroundColor(BLACK);
 }
 
 #endif // INTERFAZ_H_INCLUDED

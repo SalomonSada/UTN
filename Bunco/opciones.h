@@ -26,7 +26,7 @@
     DOS JUGADORES ---> El primer jugador que sume un puntaje >= 21.
     En caso de que el primer jugador cumpla esa condicion en el primer turno. El segundo jugador tiene la oportunidad de usar su turno. */
 
-tuple<int, int, int> jugar(string name, string name2, int jugadores, bool azar) {
+tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i;
     int result;
 
@@ -157,28 +157,65 @@ tuple<int, int, int> jugar(string name, string name2, int jugadores, bool azar) 
     if (jugadores==1) {
         puntaje1-=(fallido*2);
         finJuego_1jugador(name,puntaje1,totalBuncos,fallido,lanzamiento1-1);
-        return make_tuple(puntaje1, 1, totalBuncos);
+        return make_tuple(puntaje1, name, totalBuncos);
     }
     else {
         if (puntaje1>puntaje2) {
             finJuego_2jugadores(name, puntaje1, totalBuncos);
-            return make_tuple(puntaje1, 1, totalBuncos); /// gana player 1
+            return make_tuple(puntaje1, name, totalBuncos); /// gana player 1
         }
         else if (puntaje2>puntaje1) {
             finJuego_2jugadores(name2, puntaje2, totalBuncos2);
-            return make_tuple(puntaje2, 2, totalBuncos2); /// gana player 2
+            return make_tuple(puntaje2, name2, totalBuncos2); /// gana player 2
         }
         else {
-            return make_tuple(0, 0, 0); /// empate
+            return make_tuple(0, "", 0); /// empate
         }
     }
 }
 
 void higher(int puntaje, string name, int buncos) {
-    if (puntaje>0) {
-        cout<<"Puntaje mas alto: "<<puntaje<<" | Nombre del jugador: "<<name<<" | Cantidad de Buncos "<<buncos<<"\n\n";
+    int xcol;
+    for (xcol = 45; xcol < 75; xcol++){
+        if (puntaje>0) {
+            color("rojo");  /// ---> funcion setColor, setBackgroundColor. ubicada en funciones.h
+            locate(xcol,6); printf("%c",205);
+            locate(xcol,8); printf("%c",205);
+            locate(xcol,12); printf("%c",205);
+            color("negro");
+            locate(50,7);  cout<<"   PUNTAJE MAS ALTO";
+            locate(50,9);  cout<<"   NOMBRE: "<<name<<endl;
+            locate(50,10); cout<<" PUNTAJE: "<<puntaje<<" PUNTOS";
+            locate(50,11); cout<<" CANTIDAD DE BUNCOS: "<<buncos<<endl;
+            color("rojo");
+            locate(45,6); printf("%c",201);
+            locate(45,7); printf("%c",186);
+            locate(45,8); printf("%c",204);
+            locate(45,9); printf("%c",186);
+            locate(45,10); printf("%c",186);
+            locate(45,11); printf("%c",186);
+            locate(45,12); printf("%c",200);
+
+            locate(75,6); printf("%c",187);
+            locate(75,7); printf("%c",186);
+            locate(75,8); printf("%c",185);
+            locate(75,9); printf("%c",186);
+            locate(75,10); printf("%c",186);
+            locate(75,11); printf("%c",186);
+            locate(75,12); printf("%c",188);
+
+            locate(50,26); cout<<"";
+            locate(50,27); cout<<"";
+            locate(50,28); cout<<"";
+        }
+        else {
+            locate(50,15); cout<<"No se han registrado partidas aun \n";
+        }
+        locate(50,26); cout<<"";
+        locate(50,27); cout<<"";
+        locate(50,28); cout<<"";
     }
-    else cout<<"No se han registrado partidas aun \n\n";
+    color("negro");
     system("pause");
     system("cls");
 }

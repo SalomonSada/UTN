@@ -21,7 +21,7 @@ int presioneEnter() {
 }
 
 void cargarDados(int v[], int tam, int limite){
-    locate(33,14);cout<<"A lanzar los dados, presione ENTER, BUENA SUERTE!!";
+    locate(33,14); cout<<"A lanzar los dados, presione ENTER, BUENA SUERTE!!";
     presioneEnter();
     srand(time(NULL));
     for(int i=0; i<tam; i++ ){
@@ -38,7 +38,7 @@ void cargarDadosSimulado(int dados[], int tam) {
 }
 
 void mostrarDados(int dados[]) {
-    dadoPosuno(dados[0]); dadoPosDos(dados[1]); dadoPosTres(dados[2]);
+    dadoPosUno(dados[0]); dadoPosDos(dados[1]); dadoPosTres(dados[2]);
 }
 
 int maximo(int v[], int tam) {
@@ -133,4 +133,14 @@ int evaluarDados (int dados[], int tam, int ronda) {
     return puntos[pos];
 }
 
+void color(string color) {
+    if (color=="negro") {
+        setBackgroundColor(BLACK);
+        setColor(WHITE);
+    }
+    else if (color=="rojo") {
+        setBackgroundColor(RED);
+        setColor(YELLOW);
+    }
+}
 #endif // FUNCIONES_H_INCLUDED
