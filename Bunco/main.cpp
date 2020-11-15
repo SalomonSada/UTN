@@ -60,13 +60,27 @@ int main () {
             break;
 
             case 12: {
-                cout<<"Bienvenido!! \n\nIngrese su nombre: ";
+                cout<<"Desea jugar, de un jugador o dos jugadores? \n\nIngrese la opcion con numeros: ";cin>>opciones; system("cls");
+
+                cout<<"\n\nIngrese nombre del jugador 1: ";
                 cin>>nombre[0];
+                if (opciones==1) {
+                    system("cls");
+                    auto resultado = jugar(nombre[0], "", 1, false);
+                    puntaje = get<0>(resultado);
+                    nombreJ = get<1>(resultado);
+                     buncos = get<2>(resultado);
+                }
+                if (opciones==2) {
+                    cout<<"\n\nIngrese nombre del jugador 2: ";
+                    cin>>nombre[1];
+                    system("cls");
+                    auto resultado = jugar(nombre[0], nombre[1], 2, false);
+                    puntaje = get<0>(resultado);
+                    nombreJ = get<1>(resultado);
+                     buncos = get<2>(resultado);
+                }
                 system("cls");
-                auto resultado = jugar(nombre[0], "", 1, false); /// True a revisar
-                puntaje = get<0>(resultado);
-                nombreJ = get<1>(resultado);
-                buncos = get<2>(resultado);
             break;
             }
 

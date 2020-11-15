@@ -304,20 +304,21 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
                 locate(xcol, 19); printf("%c", 205);
 
                 if(xcol==70) {
-                locate(25, 8); cout<<"                             RONDA Nro"<<ronda<<"                          \n";
+                locate(25, 8); cout<<"                             RONDA Nro "<<ronda<<"                          \n";
                 locate(25, 7); printf("%c", 201);
                 locate(90, 7); printf("%c", 187);
                 locate(25, 8); printf("%c", 186);
                 locate(90, 8); printf("%c", 186);
 
                 locate(25, 7); printf("%c", 205);
-                locate(25, 9); printf("%c", 204);
-                locate(90, 9); printf("%c", 185);
+                locate(25, 9); printf("%c", 186);
+                locate(90, 9); printf("%c", 186);
 
                 locate(25, 10); cout<<"                        PROXIMO TURNO: ";
                 locate(25, 7); printf("%c", 201);
                 locate(25, 10); printf("%c", 186);
                 locate(90, 10); printf("%c", 186);
+
                 if (proxTurno==1){
                     locate(63, 10);cout<<name1;
                 }
@@ -334,16 +335,16 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
                 locate(90, 12); printf("%c", 186);
 
                 locate(25, 14); cout<<"                       CANTIDAD DE BUNCOS: "<<buncos1<<endl;
-                locate(25, 13); printf("%c", 204);
+                locate(25, 13); printf("%c", 186);
                 locate(25, 15); printf("%c", 204);
                 locate(90, 15); printf("%c", 185);
-                locate(90, 13); printf("%c", 185);
+                locate(90, 13); printf("%c", 186);
 
                 locate(25, 16); cout<<"                      PUNTAJE "<<name2<<": "<<puntaje2<<" PUNTOS \n";
                 locate(25, 14); printf("%c", 186);
                 locate(90, 14); printf("%c", 186);
-                locate(25, 17); printf("%c", 204);
-                locate(90, 17); printf("%c", 185);
+                locate(25, 17); printf("%c", 186);
+                locate(90, 17); printf("%c", 186);
                 locate(25, 16); printf("%c", 186);
                 locate(90, 16); printf("%c", 186);
 
@@ -354,7 +355,7 @@ void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, 
                 locate(90, 19); printf("%c", 188);
 
                 }
-                Sleep(1);
+
                 }
                 locate(35, 20);  cout << "";
                 locate(35, 21);  cout << "";
