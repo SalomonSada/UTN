@@ -3,68 +3,144 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <tuple>
-
+#include <time.h>
+#include "rlutil.h"
+using namespace rlutil;
 using namespace std;
 
-void cargarAleatorio(int v[], int tam, int limite){
-  int i;
-  srand(time(NULL));
-  for( i=0; i<tam; i++ ){
+#include "interfaz.h"
+//#define ENTER 13
+
+int presioneEnter() {
+    while (true) {
+        if (_kbhit()) {
+            char tecla = _getch();
+            if (tecla == ENTER) return 1;
+        }
+    }
+}
+
+void cargarDados(int v[], int tam, int limite){
+    locate(33,14); cout<<"A lanzar los dados, presione ENTER, BUENA SUERTE!!";
+    presioneEnter();
+    srand(time(NULL));
+    for(int i=0; i<tam; i++ ){
         v[i]=(rand()%limite)+1;
-  }
+    }
 }
 
-void menu() {
-    cout<<"::::: Bienvenido a jugar Bunco ::::: \n\n Escoja el numero de la opcion que desea seleccionar: \n\n";
-    cout<<"1) Juego nuevo para UN jugador. \n2) Juego nuevo para DOS jugadores. \n3) Puntacion mas alta. \n";
-    cout<<"4) Modo simulado (carga de datos manual). \n5) Salir. \n\n Ingresar: " ;
+void cargarDadosSimulado(int dados[], int tam) {
+    locate(37,14); cout<<"Ingresar los dados:";
+    for (int i=0; i<tam*2; i+=2) {
+        locate(57+i,14);
+        cin>>dados[i/2];
+    }
 }
 
-void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int pts){
-    cout<<"TURNO DE "<<name<<" | RONDA NRO "<<ronda<<" | PUNTAJE ACUMULADO: "<<puntaje<<" | PUNTAJE RONDA ACTUAL: "<<pts<<endl;
-    cout<<"------------------------------------------------------- \n";
-    cout<<"VECES QUE OBTUVO BUNCO: "<<buncos<<endl;
-    cout<<"------------------------------------------------------- \n";
-    cout<<"LANZAMIENTO NRO "<<lanzamientos<<"\n";
-    cout<<"------------------------------------------------------- \n\n";
+void mostrarDados(int dados[]) {
+    dadoPosUno(dados[0]); dadoPosDos(dados[1]); dadoPosTres(dados[2]);
 }
 
-void ptsRonda(int puntaje) {
-    cout<<"**************************    \n";
-    cout<<"| PUNTAJE DE LA TIRADA: "<<puntaje<<" | \n";
-    cout<<"************************** \n\n";
+int maximo(int v[], int tam) {
+    int Max, pos;
+    for (int i=0; i<tam; i++) {
+        if (i==0) {
+            Max=v[i];
+            pos=i;
+        }
+        if (v[i]>Max) {
+            Max=v[i];
+            pos=i;
+        }
+    }
+    return pos;
 }
 
-void entreRonda_1jugador(string name, int ronda, int puntaje, int buncos, int fallos, int lanzamientos)   {
-    cout<<"------------------------------ \n";
-    cout<<"        RONDA Nro "<<ronda<<"\n";
-    cout<<"------------------------------ \n";
-    cout<<"    PUNTAJE "<<name<<":"<<puntaje<<" PUNTOS     \n";
-    cout<<"          Buncos:  "<<buncos<<"           \n";
-    cout<<"      Tiradas Fallidas:"<<fallos<<"     \n";
-    cout<<"        Lanzamientos:"<<lanzamientos<<"       \n";
-    cout<<"------------------------------ \n";
-    system("pause");
-    system("cls");
+void ordenarVector(int v[], int tam ){
+    int i,j, posmin, aux;
+    for(i=0;i<tam-1;i++){
+        posmin=i;
+        for(j=i+1;j<tam;j++){
+            if(v[j]<v[posmin]) posmin=j;
+        }
+        aux=v[i];
+        v[i]=v[posmin];
+        v[posmin]=aux;
+    }
 }
 
-void entreRonda_2jugadores(string name1, string name2, int ronda, int puntaje1, int puntaje2, int buncos1, int buncos2, int proxTurno) {
-    cout<<"------------------------------ \n";
-    cout<<"        RONDA Nro "<<ronda<<"\n";
-    cout<<"    PROXIMO TURNO: ";
-    if (proxTurno==1) cout<<name1;
-    else cout<<name2;
-    cout<<"\n------------------------------ \n";
-    cout<<"  PUNTAJE "<<name1<<": "<<puntaje1<<" PUNTOS \n";
-    cout<<"    CANTIDAD DE BUNCOS: "<<buncos1<<endl;
-    cout<<"------------------------------ \n";
-    cout<<"  PUNTAJE "<<name2<<": "<<puntaje2<<" PUNTOS \n";
-    cout<<"    CANTIDAD DE BUNCOS: "<<buncos2<<endl;
-    cout<<"------------------------------ \n";
-    system("pause");
-    system("cls");
-
+int bunco(int dados[], int tam, int ronda) {
+    int buncos=0;
+    for (int i=0; i<tam; i++) if (dados[i]==ronda) buncos++;
+    if (buncos==3) return 21;
+    return 0;
 }
 
+int repetidos (int dados[]) {
+    if (dados[0]==dados[1] && dados[1]==dados[2]) return 5;
+    return 0;
+}
+
+int divisible5(int dados[], int tam) {
+    int suma=0;
+    for (int i=0; i<tam; i++) suma+=dados[i];
+    if (suma%5==0) return 3;
+    return 0;
+}
+
+int escalera (int dados[], int tam) {
+    ordenarVector(dados, tam);
+    if (dados[2]-dados[1]==1 && dados[1]-dados[0]==1) return 2;
+    return 0;
+}
+
+int coincidenciaConRonda (int dados[], int tam, int ronda) {
+    int coincidencias=0;
+    for (int i=0; i<tam; i++) if (dados[i]==ronda) coincidencias++;
+    if (coincidencias==2) return 2;
+    if (coincidencias==1) return 1;
+    return 0;
+}
+
+int evaluarDados (int dados[], int tam, int ronda) {
+    int puntos[5], pos;
+
+    puntos[0] = bunco(dados, tam, ronda);
+    puntos[1] = repetidos(dados);
+    puntos[2] = divisible5(dados, tam);
+    puntos[3] = escalera(dados, tam);
+    puntos[4] = coincidenciaConRonda(dados, tam, ronda);
+
+    pos = maximo(puntos, 5);
+
+    locate(42,21); cout<<"PUNTAJE TIRADA: "<<puntos[pos];
+    locate(42,22); cout<<"       SACASTE: ";
+    if (puntos[pos] != 0) {
+        switch (pos) {
+            case 0: cout<<"BUNCO!!!  \n\n";
+                break;
+            case 1: cout<<"3 REPETIDOS DISTINTOS DE LA RONDA  \n\n";
+                break;
+            case 2: cout<<"SUMA DIVISIBLE POR 5  \n\n";
+                break;
+            case 3: cout<<"ESCALERA  \n\n";
+                break;
+            case 4: cout<<"COINCIDENCIA CON RONDA  \n\n";
+                break;
+        }
+    }
+    else cout<<"TIRO FALLIDO \n\n";
+    return puntos[pos];
+}
+
+void color(string color) {
+    if (color=="negro") {
+        setBackgroundColor(BLACK);
+        setColor(WHITE);
+    }
+    else if (color=="rojo") {
+        setBackgroundColor(RED);
+        setColor(YELLOW);
+    }
+}
 #endif // FUNCIONES_H_INCLUDED

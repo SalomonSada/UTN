@@ -1,77 +1,85 @@
 #include <iostream>
 #include <cstdlib>
 #include <tuple>
-#include <time.h>
+#include <conio.h>
+#include <cstring>
 
-using namespace std;
+#include "rlutil.h"
 #include "opciones.h"
 #include "funciones.h"
+#include "interfaz.h"
+using namespace std;
+using namespace rlutil;
+
+#define ABAJO 80
+#define ARRIBA 72
+#define ENTER 13
 
 int main () {
+    /// para usar en menu, y parametros
     int opciones;
-    string name[2];
-    int puntaje, jugadores; /// ---> high score
+    string nombre[2];
 
-    menu();
-    cin>>opciones;
-    system("cls");
+    /// almacenar los datos que devolveran las funciones
+    int puntaje=0, buncos;
+    string nombreJ;
+
+    /// almacenar los datos del jugador con el puntaje mas alto
+    int puntajeGanador=0, buncosGanador;
+    string nombreGanador;
+
     while (true) {
+        opciones=menu();
+         system("cls");
         switch(opciones) {
-            case 1: {
+            case 9: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 system("cls");
 
-                auto resultado = jugar(name[0], "", 1, true);
+                auto resultado = jugar(nombre[0], "", 1, true);
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
-                cout<<"Jugador: "<<name[0]<<".................... "<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
+                nombreJ = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
-            case 2: {
+            case 10: {
                 cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
-                cin>>name[1];
+                cin>>nombre[1];
                 system("cls");
-                auto resultado = jugar(name[0], name[1], 2, true);
+                auto resultado = jugar(nombre[0], nombre[1], 2, true);
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
-                /** el cout de abajo se mostrara desde la funcion jugar() en el header. (lo muestro aca para probar
-                 que esta devolviendo los datos que necesitamos al main() para establecer la puntuacion mas alta) */
-                if (jugadores == 1) cout<<"Jugador: "<<name[0]<<".................... ";
-                else cout<<"Jugador: "<<name[1]<<".................... ";
-                cout<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
+                nombreJ = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
-            case 3:
-                higher();
+            case 11:
+                higher(puntajeGanador, nombreGanador, buncosGanador);
             break;
 
-            case 4: {
+            case 12: {
                 cout<<"Bienvenido!! \n\nIngrese su nombre: ";
-                cin>>name[0];
+                cin>>nombre[0];
                 system("cls");
-                auto resultado = jugar(name[0], "", 1, false); /// True a revisar
+                auto resultado = jugar(nombre[0], "", 1, false); /// True a revisar
                 puntaje = get<0>(resultado);
-                jugadores = get<1>(resultado);
-                cout<<"Jugador: "<<name[0]<<".................... "<<puntaje<<" | Nro de jugador: "<<jugadores<<"\n\n";
+                nombreJ = get<1>(resultado);
+                buncos = get<2>(resultado);
             break;
             }
 
-            case 5:
-                cout<<"Gracias por usar nuestro programa. \n\n";
+            case 13:
+                salir();
                 return 0;
             break;
         }
-        /// Caso de ingresar un dato equivocado:
-        if (opciones < 1 || opciones > 5) {
-            cout<<"\n\n"<<"Haz escogido "<<opciones<<". Selecciona una opcion valida, por favor. \n\n";
-            system("pause");
-            system("cls");
+
+        if (puntaje>puntajeGanador) {
+            puntajeGanador=puntaje;
+            buncosGanador=buncos;
+            nombreGanador=nombreJ;
         }
-        menu();
-        cin>>opciones;
     }
-    return 0;
 }
