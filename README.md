@@ -2,7 +2,7 @@
 
 ## Funcion jugar
 
-Pensé hacer una funcion jugar, que recibirá 4 parametros:
+recibirá 4 parametros:
 
 1.- string name   ---> nombre del jugador 1
 
