@@ -2,7 +2,7 @@
 
 ## Funcion jugar
 
-Pensé hacer una funcion jugar, que recibirá 4 parametros:
+recibirá 4 parametros:
 
 1.- string name   ---> nombre del jugador 1
 
@@ -23,7 +23,7 @@ SIMULADO: Acorde a si lo queremos hacer de UN jugador o DOS, seran los mismos pa
 -------------------------------------------------------------------
 ## Return más de un valor de una función
 
-Investigando ví que existe una librería llamada "tuple", que permite devolver varios valores y de distinos tipos de una función.
+Investigando vimos que existe una librería llamada "tuple", que permite devolver varios valores y de distinos tipos de una función.
 
 Copio referencias:
 
