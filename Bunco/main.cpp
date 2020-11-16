@@ -15,12 +15,15 @@ using namespace rlutil;
 #define ARRIBA 72
 #define ENTER 13
 
+struct Resultados resultados;
+
 int main () {
     /// para usar en menu, y parametros
     int opciones;
     string nombre[2];
 
     /// almacenar los datos que devolveran la funcion jugar (...)
+    Resultados v;
     int puntaje=0, buncos;
     string nombreJ;
 
@@ -36,20 +39,20 @@ int main () {
                 nombre[0] = ingresarNombre(1);
                 system("cls");
 
-                auto resultado = jugar(nombre[0], "", 1,true);
-                puntaje = get<0>(resultado);
-                nombreJ = get<1>(resultado);
-                buncos = get<2>(resultado);
+                v = jugar(nombre[0], "", 1,true);
+                puntaje = v.p;
+                nombreJ = v.n;
+                buncos = v.b;
             break;
             }
             case 10: {
                 nombre[0] = ingresarNombre(1);
                 nombre[1] = ingresarNombre(2);
                 system("cls");
-                auto resultado = jugar(nombre[0], nombre[1], 2, true);
-                puntaje = get<0>(resultado);
-                nombreJ = get<1>(resultado);
-                buncos = get<2>(resultado);
+                v = jugar(nombre[0], nombre[1], 2, true);
+                puntaje = v.p;
+                nombreJ = v.n;
+                buncos = v.b;
             break;
             }
             case 11:
@@ -62,18 +65,18 @@ int main () {
                 nombre[0] = ingresarNombre(1);
                 if (opciones==1) {
                     system("cls");
-                    auto resultado = jugar(nombre[0], "", 1, false);
-                    puntaje = get<0>(resultado);
-                    nombreJ = get<1>(resultado);
-                     buncos = get<2>(resultado);
+                    v = jugar(nombre[0], "", 1, false);
+                    puntaje = v.p;
+                    nombreJ = v.n;
+                    buncos = v.b;
                 }
                 if (opciones==2) {
                     nombre[1] = ingresarNombre(2);
                     system("cls");
-                    auto resultado = jugar(nombre[0], nombre[1], 2, false);
-                    puntaje = get<0>(resultado);
-                    nombreJ = get<1>(resultado);
-                     buncos = get<2>(resultado);
+                    v = jugar(nombre[0], nombre[1], 2, false);
+                    puntaje = v.p;
+                    nombreJ = v.n;
+                    buncos = v.b;
                 }
                 system("cls");
             break;

@@ -6,12 +6,12 @@
 
 /// ||........................................."Descripción de funciones" ..................................................||
 
-tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar); /// ---> Se ejecuta el juego, acorde a la modalidad
+//tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar); /// ---> Se ejecuta el juego, acorde a la modalidad
 
-void higher(int puntaje, string name, int buncos); /// ---> Muestra el puntaje mas alto acorde a las especificaciones del documento de los profesores
+//void higher(int puntaje, string name, int buncos); /// ---> Muestra el puntaje mas alto acorde a las especificaciones del documento de los profesores
 
 /** Reglas del bunco:
-    6 rondas, del 1 al 6. ---->  Para comenzar c/ronda se lanzan tres dados. Acorde a los resultados, tendra un puntaje y se vera si sigue lanzando:
+    6 rondas, del 1 al 6. ---->  Para comenzar c/ronda se lanzan tres dados. Acorde a los Resultados, tendra un puntaje y se vera si sigue lanzando:
     .................................................................................
     PUNTAJE:
     21 pts --> 3 dados iguales al numero de ronda.
@@ -29,7 +29,13 @@ void higher(int puntaje, string name, int buncos); /// ---> Muestra el puntaje m
     DOS JUGADORES ---> El primer jugador que sume un puntaje >= 21.
     En caso de que el primer jugador cumpla esa condicion en el primer turno. El segundo jugador tiene la oportunidad de usar su turno. */
 
-tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar) {
+struct Resultados {
+    int p;
+    string n;
+    int b;
+};
+
+Resultados jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i;
     int result;  /// almacena los puntos de cada tirada
 
@@ -158,20 +164,20 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
     if (jugadores==1) {
         puntaje1-=(fallido*2);
         finJuego_1jugador(name,puntaje1,totalBuncos,fallido,lanzamiento1-1);
-        return make_tuple(puntaje1, name, totalBuncos);
+        return Resultados{puntaje1, name, totalBuncos};
     }
     else {  /// jugadores == 2
         if (puntaje1>puntaje2) {
             finJuego_2jugadores(name, puntaje1, totalBuncos);
-            return make_tuple(puntaje1, name, totalBuncos); /// gana player 1
+            return Resultados{puntaje1, name, totalBuncos}; /// gana player 1
         }
         else if (puntaje2>puntaje1) {
             finJuego_2jugadores(name2, puntaje2, totalBuncos2);
-            return make_tuple(puntaje2, name2, totalBuncos2); /// gana player 2
+            return Resultados{puntaje2, name2, totalBuncos2}; /// gana player 2
         }
         else {
                 cout<<"empataron";
-            return make_tuple(0, "", 0); /// empate
+            return Resultados{0, "", 0}; /// empate
         }
     }
 }
