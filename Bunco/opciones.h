@@ -1,11 +1,14 @@
 #ifndef OPCIONES_H_INCLUDED
 #define OPCIONES_H_INCLUDED
 
-
-
-
 #include "funciones.h"
 #include "interfaz.h"
+
+/// ||........................................."Descripción de funciones" ..................................................||
+
+tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar); /// ---> Se ejecuta el juego, acorde a la modalidad
+
+void higher(int puntaje, string name, int buncos); /// ---> Muestra el puntaje mas alto acorde a las especificaciones del documento de los profesores
 
 /** Reglas del bunco:
     6 rondas, del 1 al 6. ---->  Para comenzar c/ronda se lanzan tres dados. Acorde a los resultados, tendra un puntaje y se vera si sigue lanzando:
@@ -22,13 +25,13 @@
     DOS JUGADORES ---> hasta que el puntaje sumado sea >= 21 ó tenga un tiro fallido
     .................................................................................
     ¿CUANDO TERMINA UNA RONDA?
-       UN JUGADOR ---> hasta que el puntaje sumado sea >= 21. Los tiros fallidos se cuentan para restar 3 puntos al final por cada uno.
+       UN JUGADOR ---> hasta que el puntaje sumado sea >= 21. Los tiros fallidos se cuentan para restar 2 puntos al final por cada uno.
     DOS JUGADORES ---> El primer jugador que sume un puntaje >= 21.
     En caso de que el primer jugador cumpla esa condicion en el primer turno. El segundo jugador tiene la oportunidad de usar su turno. */
 
 tuple<int, string, int> jugar(string name, string name2, int jugadores, bool azar) {
     int dados[3], i;
-    int result;
+    int result;  /// almacena los puntos de cada tirada
 
     int puntaje1=0;
     int totalBuncos=0;
@@ -78,7 +81,7 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
                 if (jugadores==1) {
                     if (puntaje_x_turno1 >= 21) turno_player_1=false;
                 }
-                else {
+                else {  /// jugadores == 2
                     if (puntaje_x_turno1+puntaje_x_Ronda1 >= 21) turno_player_1=false;
                 }
 
@@ -93,14 +96,11 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
 ///     -----> Cerramos la ronda para modo UN jugador <-----
             if (jugadores==1) {
                 nextRound=true;
-    //       puntaje1+=puntaje_x_Ronda1;
                 entreRonda_1jugador(name,i,puntaje1,totalBuncos,fallido,lanzamiento1);
             }
 
 ///      ||..................... MODO DOS JUGADORES .....................||
-            else {
-          //      puntaje_x_Ronda1+=puntaje_x_turno1;
-          //      puntaje1+=puntaje_x_turno1;
+            else { /// jugadores == 2
                 entreRonda_2jugadores(name, name2, i, puntaje1, puntaje2, totalBuncos, totalBuncos2, 2);
                 if (puntaje_x_Ronda1>=21) {
                     if (turno>1) {
@@ -150,6 +150,7 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
                 }
 ///         -----> Cerramos la Ronda para el modo DOS jugadores <-----
                 if (puntaje_x_Ronda1>=21 || puntaje_x_Ronda2>=21) nextRound = true;
+
                 turno++;
             }
         }
@@ -159,7 +160,7 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
         finJuego_1jugador(name,puntaje1,totalBuncos,fallido,lanzamiento1-1);
         return make_tuple(puntaje1, name, totalBuncos);
     }
-    else {
+    else {  /// jugadores == 2
         if (puntaje1>puntaje2) {
             finJuego_2jugadores(name, puntaje1, totalBuncos);
             return make_tuple(puntaje1, name, totalBuncos); /// gana player 1
@@ -169,6 +170,7 @@ tuple<int, string, int> jugar(string name, string name2, int jugadores, bool aza
             return make_tuple(puntaje2, name2, totalBuncos2); /// gana player 2
         }
         else {
+                cout<<"empataron";
             return make_tuple(0, "", 0); /// empate
         }
     }

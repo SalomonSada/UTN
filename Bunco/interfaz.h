@@ -7,34 +7,43 @@
 #include "rlutil.h"
 using namespace rlutil;
 
+/// ||........................................."Descripción de funciones" ..................................................||
+
+void tituloAnimado();
+
+int menu();
+
+/// ||........................................."Desarrollo de funciones" ..................................................||
+
+
 void tituloAnimado() {
     int xcol;
     char vtitulo[] = "   BIENVENIDOS A JUGAR BUNCO   ";
         // primera linea
         setColor(YELLOW);
         setBackgroundColor(RED);
-        gotoxy(10, 2); printf("%c", 201);
-        gotoxy(10, 3); printf("%c", 177);
-        gotoxy(10, 4); printf("%c", 200);
+        locate(10, 2); printf("%c", 201);
+        locate(10, 3); printf("%c", 177);
+        locate(10, 4); printf("%c", 200);
 
 
         for (xcol = 11; xcol < 100; xcol++) {
-            gotoxy(xcol, 2); printf("%c", 205);
-            gotoxy(xcol, 4); printf("%c", 205);
+            locate(xcol, 2); printf("%c", 205);
+            locate(xcol, 4); printf("%c", 205);
             if(xcol==70) {
-                gotoxy(40, 3); cout<<vtitulo;
-                gotoxy(39, 2); printf("%c", 203);
-                gotoxy(39, 3); printf("%c", 178);
-                gotoxy(39, 4); printf("%c", 202);
-                gotoxy(70, 2); printf("%c", 203);
-                gotoxy(70, 3); printf("%c", 178);
-                gotoxy(70, 4); printf("%c", 202);
+                locate(40, 3); cout<<vtitulo;
+                locate(39, 2); printf("%c", 203);
+                locate(39, 3); printf("%c", 178);
+                locate(39, 4); printf("%c", 202);
+                locate(70, 2); printf("%c", 203);
+                locate(70, 3); printf("%c", 178);
+                locate(70, 4); printf("%c", 202);
             }
             Sleep(1);
         }
-        gotoxy(100, 2); printf("%c", 187);
-        gotoxy(100, 3); printf("%c", 177);
-        gotoxy(100, 4); printf("%c", 188);
+        locate(100, 2); printf("%c", 187);
+        locate(100, 3); printf("%c", 177);
+        locate(100, 4); printf("%c", 188);
 
 }
 
@@ -58,7 +67,7 @@ int menu() {
 
     gotoxy(x, y); printf(" %c", 16); //a partir de aca es para utilizar las flechas del teclado
     while (true) {
-        if (_kbhit()) {
+        if (_kbhit()) { /// percibe cuando se toca una tecla
             gotoxy(x, y); cout<<"   ";
             char tecla = _getch();
             if (tecla == ENTER) {
@@ -73,7 +82,7 @@ int menu() {
     }
 }
 
-void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int puntos){
+void infoTurno(string name, int ronda, int puntaje, int buncos, int lanzamientos, int puntos) {
     int xcol;
     for (xcol = 25; xcol < 90; xcol++) {
         locate(xcol, 7); printf("%c", 205);
@@ -440,12 +449,12 @@ void finJuego_2jugadores(string name, int puntaje, int buncos)   {
 ///             |||............................................DADOS............................................|||
 
 void dadoUno(int x) {
-    locate(x+4,18); printf("%c", 254); // medio
+    locate(x+4,18); printf("%c", 254);
 }
 
 void dadoDos(int x) {
-    locate(x+2,17); printf("%c", 254); // arriba, izquierda
-    locate(x+6,19); printf("%c", 254); // abajo, derecha
+    locate(x+2,17); printf("%c", 254);
+    locate(x+6,19); printf("%c", 254);
 }
 
 void dadoTres(int x) {
@@ -478,19 +487,19 @@ void dadoSeis(int x) {
     locate(x+6,19); printf("%c", 254);
 }
 
-void escogerDado(int posDado, int dado) {
-    switch (posDado) {
-    case 1:    dadoUno(44+dado);
+void escogerDado(int dado, int posDado) {
+    switch (dado) {
+    case 1:    dadoUno(44+posDado);  // 44 + 0 || 44 + 10 |||
         break;
-    case 2:    dadoDos(44+dado);
+    case 2:    dadoDos(44+posDado);
         break;
-    case 3:   dadoTres(44+dado);
+    case 3:   dadoTres(44+posDado);
         break;
-    case 4: dadoCuatro(44+dado);
+    case 4: dadoCuatro(44+posDado);
         break;
-    case 5:  dadoCinco(44+dado);
+    case 5:  dadoCinco(44+posDado);
         break;
-    case 6:   dadoSeis(44+dado);
+    case 6:   dadoSeis(44+posDado);
         break;
     }
 }

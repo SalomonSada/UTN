@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <tuple>
-#include <conio.h>
 #include <cstring>
+#include <time.h>
 
 #include "rlutil.h"
 #include "opciones.h"
@@ -20,7 +20,7 @@ int main () {
     int opciones;
     string nombre[2];
 
-    /// almacenar los datos que devolveran las funciones
+    /// almacenar los datos que devolveran la funcion jugar (...)
     int puntaje=0, buncos;
     string nombreJ;
 
@@ -33,21 +33,18 @@ int main () {
          system("cls");
         switch(opciones) {
             case 9: {
-                cout<<"Bienvenido!! \n\nIngrese su nombre: ";
-                cin>>nombre[0];
+                nombre[0] = ingresarNombre(1);
                 system("cls");
 
-                auto resultado = jugar(nombre[0], "", 1, true);
+                auto resultado = jugar(nombre[0], "", 1,true);
                 puntaje = get<0>(resultado);
                 nombreJ = get<1>(resultado);
                 buncos = get<2>(resultado);
             break;
             }
             case 10: {
-                cout<<"Bienvenido!! \n\nIngrese nombre del jugador 1: ";
-                cin>>nombre[0];
-                cout<<"\n\n"<<"Ingrese nombre del jugador 2: ";
-                cin>>nombre[1];
+                nombre[0] = ingresarNombre(1);
+                nombre[1] = ingresarNombre(2);
                 system("cls");
                 auto resultado = jugar(nombre[0], nombre[1], 2, true);
                 puntaje = get<0>(resultado);
@@ -62,8 +59,7 @@ int main () {
             case 12: {
                 cout<<"Desea jugar, de un jugador o dos jugadores? \n\nIngrese la opcion con numeros: ";cin>>opciones; system("cls");
 
-                cout<<"\n\nIngrese nombre del jugador 1: ";
-                cin>>nombre[0];
+                nombre[0] = ingresarNombre(1);
                 if (opciones==1) {
                     system("cls");
                     auto resultado = jugar(nombre[0], "", 1, false);
@@ -72,8 +68,7 @@ int main () {
                      buncos = get<2>(resultado);
                 }
                 if (opciones==2) {
-                    cout<<"\n\nIngrese nombre del jugador 2: ";
-                    cin>>nombre[1];
+                    nombre[1] = ingresarNombre(2);
                     system("cls");
                     auto resultado = jugar(nombre[0], nombre[1], 2, false);
                     puntaje = get<0>(resultado);
